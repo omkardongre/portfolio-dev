@@ -15,6 +15,7 @@ interface AnimatedProjectCardProps {
   tech: string[]
   github?: string
   demo?: string
+  slug?: string
   index: number
 }
 
@@ -23,7 +24,8 @@ export function AnimatedProjectCard({
   description, 
   tech, 
   github, 
-  demo, 
+  demo,
+  slug,
   index 
 }: AnimatedProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -90,7 +92,14 @@ export function AnimatedProjectCard({
               </Badge>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            {slug && (
+              <Button size="sm" asChild>
+                <Link href={`/projects/${slug}`}>
+                  View Details
+                </Link>
+              </Button>
+            )}
             {github && (
               <Button variant="outline" size="sm" asChild>
                 <Link href={github} target="_blank">

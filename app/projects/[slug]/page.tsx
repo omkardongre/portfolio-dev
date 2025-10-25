@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
+import { useGSAP } from '@/lib/gsap';
+import { gsap } from 'gsap';
 import Link from "next/link";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
@@ -44,6 +46,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { HeroBackground } from "@/components/hero-background";
 
 const projectsData = {
   socialhub: {
@@ -453,6 +456,35 @@ export default function ProjectDetail({
   const [activeImage, setActiveImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const project = projectsData[params.slug as keyof typeof projectsData];
+  const headerRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+
+  // GSAP animations
+  useGSAP(() => {
+    if (headerRef.current) {
+      gsap.from(headerRef.current.children, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+      });
+    }
+
+    if (featuresRef.current) {
+      gsap.from(featuresRef.current.children, {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: featuresRef.current,
+          start: 'top 80%',
+        },
+      });
+    }
+  }, []);
 
   // Keyboard navigation for lightbox
   const handleLightboxKey = useCallback(
@@ -502,7 +534,8 @@ export default function ProjectDetail({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative">
+      <HeroBackground />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -543,14 +576,9 @@ export default function ProjectDetail({
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20">
+      <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
+          <div ref={headerRef} className="text-center mb-16">
             <div className="flex justify-center items-center gap-4 mb-6">
               <Badge variant="secondary" className="text-sm">
                 {project.category}
@@ -568,7 +596,7 @@ export default function ProjectDetail({
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
               {project.description}
             </p>
-          </motion.div>
+          </div>
 
           {/* Project Stats */}
           <motion.div
@@ -783,12 +811,7 @@ export default function ProjectDetail({
             </TabsContent>
 
             <TabsContent value="features" className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
-              >
+              <div ref={featuresRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {project.features.map((feature, index) => (
                   <Card
                     key={index}
@@ -811,7 +834,7 @@ export default function ProjectDetail({
                     </CardContent>
                   </Card>
                 ))}
-              </motion.div>
+              </div>
             </TabsContent>
 
             <TabsContent value="architecture" className="space-y-8">

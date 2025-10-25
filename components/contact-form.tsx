@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
+import toast from "react-hot-toast"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -81,6 +82,10 @@ export function ContactForm() {
 
       if (response.ok) {
         setSubmitStatus("success")
+        toast.success("Message sent successfully! I'll get back to you soon.", {
+          duration: 4000,
+          icon: '✉️',
+        })
         setFormData({
           name: "",
           email: "",
@@ -97,11 +102,16 @@ export function ContactForm() {
       setSubmitStatus("error")
 
       if (error instanceof TypeError && error.message.includes("fetch")) {
-        setErrorMessage("Network error: Unable to connect to the server. Please check your internet connection.")
+        const msg = "Network error: Unable to connect to the server. Please check your internet connection."
+        setErrorMessage(msg)
+        toast.error(msg)
       } else if (error instanceof Error) {
         setErrorMessage(error.message)
+        toast.error(error.message)
       } else {
-        setErrorMessage("An unexpected error occurred. Please try again.")
+        const msg = "An unexpected error occurred. Please try again."
+        setErrorMessage(msg)
+        toast.error(msg)
       }
     } finally {
       setIsSubmitting(false)
