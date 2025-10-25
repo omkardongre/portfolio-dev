@@ -5,6 +5,7 @@ import { useGSAP } from '@/lib/gsap'
 import { gsap } from 'gsap'
 import { MagneticButton } from './magnetic-button'
 import { HeroBackground } from './hero-background'
+import { StaggeredText } from './staggered-text'
 
 interface HeroSectionProps {
   onNavigate: (section: string) => void

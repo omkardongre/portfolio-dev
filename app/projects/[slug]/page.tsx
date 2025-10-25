@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { useGSAP } from '@/lib/gsap';
 import { gsap } from 'gsap';
+import { PageLoader } from '@/components/page-loader';
 import Link from "next/link";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
@@ -455,12 +456,17 @@ export default function ProjectDetail({
 }) {
   const [activeImage, setActiveImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const project = projectsData[params.slug as keyof typeof projectsData];
   const headerRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
+  const architectureRef = useRef<HTMLDivElement>(null);
+  const challengesRef = useRef<HTMLDivElement>(null);
 
   // GSAP animations
   useGSAP(() => {
+    if (!showContent) return;
+    
     if (headerRef.current) {
       gsap.from(headerRef.current.children, {
         y: 50,
@@ -484,7 +490,37 @@ export default function ProjectDetail({
         },
       });
     }
-  }, []);
+  }, [showContent]);
+
+  // ScrollReveal for sections
+  useEffect(() => {
+    if (!showContent || typeof window === 'undefined') return;
+
+    // Dynamically import ScrollReveal only on client
+    import('scrollreveal').then((ScrollReveal) => {
+      const sr = ScrollReveal.default();
+      
+      const srConfig = {
+        origin: 'bottom',
+        distance: '20px',
+        duration: 600,
+        delay: 200,
+        opacity: 0,
+        easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+        reset: false,
+      };
+      
+      const refs = [architectureRef, challengesRef];
+      refs.forEach((ref, index) => {
+        if (ref.current) {
+          sr.reveal(ref.current, {
+            ...srConfig,
+            delay: 200 + index * 100,
+          });
+        }
+      });
+    });
+  }, [showContent]);
 
   // Keyboard navigation for lightbox
   const handleLightboxKey = useCallback(
@@ -534,7 +570,12 @@ export default function ProjectDetail({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative">
+    <>
+      <PageLoader onComplete={() => setShowContent(true)} />
+      <div 
+        className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative"
+        style={{ opacity: showContent ? 1 : 0, transition: 'opacity 0.5s' }}
+      >
       <HeroBackground />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
@@ -838,6 +879,7 @@ export default function ProjectDetail({
             </TabsContent>
 
             <TabsContent value="architecture" className="space-y-8">
+              <div ref={architectureRef}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -872,9 +914,11 @@ export default function ProjectDetail({
                   </CardContent>
                 </Card>
               </motion.div>
+              </div>
             </TabsContent>
 
             <TabsContent value="challenges" className="space-y-8">
+              <div ref={challengesRef}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -909,13 +953,14 @@ export default function ProjectDetail({
                   </Card>
                 ))}
               </motion.div>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
       </section>
 
-      {/* Call to Action
-      {project.demo && (
+      {/* Call to Action */}
+      {/* {project.demo && (
         <section className="py-16 bg-blue-600 dark:bg-blue-800">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
@@ -962,5 +1007,6 @@ export default function ProjectDetail({
         </section>
       )} */}
     </div>
+    </>
   );
 }

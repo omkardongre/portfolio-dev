@@ -28,6 +28,9 @@ export function ThemeToggle() {
     const newTheme = !isDark
     setIsDark(newTheme)
 
+    // Add transition class for smooth theme change
+    document.documentElement.classList.add('theme-transition')
+
     // Apply theme to document immediately
     if (newTheme) {
       document.documentElement.classList.add("dark")
@@ -36,6 +39,11 @@ export function ThemeToggle() {
       document.documentElement.classList.remove("dark")
       localStorage.setItem("theme", "light")
     }
+
+    // Remove transition class after animation
+    setTimeout(() => {
+      document.documentElement.classList.remove('theme-transition')
+    }, 300)
   }
 
   return (

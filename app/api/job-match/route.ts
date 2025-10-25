@@ -1,15 +1,32 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import portfolioData from '../knowledge/portfolio-data.json'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
-export const runtime = 'nodejs'
+export const runtime = 'edge'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || '')
 
-// Load resume data
-const resumePath = join(process.cwd(), 'app/api/knowledge/resume')
-const resumeData = readFileSync(resumePath, 'utf-8')
+// Resume data inline
+const resumeData = `# OMKAR DONGRE
+SOFTWARE ENGINEER | FULL-STACK DEVELOPER
+
+Pune, India | omkardongre5@gmail.com
+
+## PROFILE
+Software Engineer with 2.5+ years building distributed systems and full-stack applications. Specialized in Go/C++ backend development with hands-on experience in network security, protocol optimization, and database systems.
+
+## TECHNICAL SKILLS
+Go, TypeScript, React, C, C++, Python, JavaScript, Next.js, Docker, AWS, Microservices, RESTful APIs
+
+## PROFESSIONAL EXPERIENCE
+### Data Plane Team Engineer, Sandvine Networks (2021 — 2023)
+- Designed centralized Go-based microservices for real-time threat detection
+- Optimized session context protocol reducing CPU/memory overhead
+- Implemented YANG data modeling for network configuration
+
+### Software Engineering Intern, Bentley Systems (2021)
+- Led Oracle to MSSQL database migration
+- Enhanced automation testing framework
+`
 
 export async function POST(req: Request) {
   try {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Github,
@@ -35,11 +35,24 @@ import { HeroSection } from "@/components/hero-section";
 import { AnimatedProjectCard } from "@/components/animated-project-card";
 import { AIChat } from "@/components/ai-chat";
 import { JobMatchAnalyzer } from "@/components/job-match-analyzer";
+import { PageLoader } from "@/components/page-loader";
+import { FeaturedProjectCard } from "@/components/featured-project-card";
+import { MobileMenu } from "@/components/mobile-menu";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
+  const [showContent, setShowContent] = useState(false);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  
+  // Refs for ScrollReveal
+  const aboutRef = useRef<HTMLElement>(null);
+  const journeyRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
+  const resumeRef = useRef<HTMLElement>(null);
+  const jobMatchRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,19 +86,87 @@ export default function Portfolio() {
       }
     };
 
+    // Keyboard shortcuts
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Press 'H' to go home
+      if (e.key === 'h' || e.key === 'H') {
+        if (!['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
+          scrollToSection('home');
+        }
+      }
+      // Press 'C' to go to contact
+      if (e.key === 'c' || e.key === 'C') {
+        if (!['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
+          scrollToSection('contact');
+        }
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeyPress);
+    };
   }, []);
+
+  // ScrollReveal for sections
+  useEffect(() => {
+    if (!showContent || typeof window === 'undefined') return;
+    
+    // Dynamically import ScrollReveal only on client
+    import('scrollreveal').then((ScrollReveal) => {
+      const sr = ScrollReveal.default();
+      
+      const srConfig = {
+        origin: 'bottom',
+        distance: '20px',
+        duration: 600,
+        delay: 200,
+        opacity: 0,
+        easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+        reset: false,
+      };
+      
+      const refs = [
+        aboutRef,
+        journeyRef,
+        projectsRef,
+        skillsRef,
+        resumeRef,
+        jobMatchRef,
+        contactRef,
+      ];
+
+      refs.forEach((ref, index) => {
+        if (ref.current) {
+          sr.reveal(ref.current, {
+            ...srConfig,
+            delay: 100 + index * 50,
+          });
+        }
+      });
+    });
+  }, [showContent]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Update URL hash without jumping
+      if (typeof window !== 'undefined') {
+        window.history.pushState(null, '', `#${sectionId}`);
+      }
     }
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <PageLoader onComplete={() => setShowContent(true)} />
+      <div 
+        className="min-h-screen bg-background text-foreground" 
+        style={{ opacity: showContent ? 1 : 0, transition: 'opacity 0.5s' }}
+      >
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,11 +184,7 @@ export default function Portfolio() {
                 { id: "about", label: "About" },
                 { id: "journey", label: "Journey" },
                 { id: "projects", label: "Projects" },
-                { id: "github-stats", label: "GitHub" },
-                { id: "freelance", label: "Freelance" },
-                { id: "opensource", label: "Open Source" },
                 { id: "skills", label: "Skills" },
-                { id: "resume", label: "Resume" },
                 { id: "contact", label: "Contact" },
               ].map((item) => (
                 <button
@@ -123,7 +200,10 @@ export default function Portfolio() {
                 </button>
               ))}
             </div>
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <MobileMenu activeSection={activeSection} onNavigate={scrollToSection} />
+            </div>
           </div>
         </div>
       </nav>
@@ -132,7 +212,7 @@ export default function Portfolio() {
       <HeroSection onNavigate={scrollToSection} />
 
       {/* About Section */}
-      <section id="about" className="py-20">
+      <section ref={aboutRef} id="about" className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -179,7 +259,7 @@ export default function Portfolio() {
       </section>
 
       {/* Journey Section */}
-      <section id="journey" className="py-20 bg-muted/50">
+      <section ref={journeyRef} id="journey" className="py-20 bg-muted/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -304,7 +384,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20">
+      <section ref={projectsRef} id="projects" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -458,17 +538,50 @@ export default function Portfolio() {
             <Card className="shadow-lg">
               <CardContent className="p-12">
                 <div className="text-6xl mb-6">
-                  <GitBranch className="w-16 h-16 mx-auto text-muted-foreground" />
+                  <GitBranch className="w-16 h-16 mx-auto text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Coming Soon</h3>
+                <h3 className="text-2xl font-bold mb-4">Active Contributor</h3>
                 <p className="text-lg text-muted-foreground mb-6">
-                  Actively contributing to open source in Node.js, React, and
-                  backend tools. Merged PRs and projects will be listed here
-                  soon.
+                  Contributing to open source projects in workflow automation and developer tooling.
                 </p>
-                <p className="text-muted-foreground">
-                  Follow my GitHub to see my latest contributions and open
-                  source work.
+                
+                <div className="mb-8">
+                  <h4 className="text-xl font-semibold mb-3">Featured Project</h4>
+                  <a 
+                    href="https://github.com/triggerdotdev/trigger.dev" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary hover:underline text-lg"
+                  >
+                    <GitBranch className="w-5 h-5" />
+                    Trigger.dev
+                  </a>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Workflow automation platform • TypeScript, Node.js, React
+                  </p>
+                </div>
+
+                <div className="space-y-2 text-left max-w-md mx-auto">
+                  <p className="text-sm text-muted-foreground flex items-start gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Improving developer experience and API design</span>
+                  </p>
+                  <p className="text-sm text-muted-foreground flex items-start gap-2">
+                    <span className="text-primary">•</span>
+                    <span>Code quality and performance improvements</span>
+                  </p>
+                </div>
+
+                <p className="text-muted-foreground mt-8">
+                  Follow my contributions on{' '}
+                  <a 
+                    href="https://github.com/yourusername" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    GitHub
+                  </a>
                 </p>
               </CardContent>
             </Card>
@@ -477,7 +590,7 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20">
+      <section ref={skillsRef} id="skills" className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -570,7 +683,7 @@ export default function Portfolio() {
       </section>
 
       {/* Resume Section */}
-      <section id="resume" className="py-20 bg-muted/50">
+      <section ref={resumeRef} id="resume" className="py-20 bg-muted/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -604,7 +717,7 @@ export default function Portfolio() {
       </section>
 
       {/* Job Match Analyzer Section */}
-      <section id="job-match" className="py-20">
+      <section ref={jobMatchRef} id="job-match" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -633,7 +746,7 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
+      <section ref={contactRef} id="contact" className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -776,5 +889,6 @@ export default function Portfolio() {
       {/* AI Chat Assistant */}
       <AIChat />
     </div>
+    </>
   );
 }

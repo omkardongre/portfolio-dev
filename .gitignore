@@ -1,4 +1,5 @@
 node_modules/
-
-# temp
-# self-docs
+.next/
+.env
+temp
+self-docs
