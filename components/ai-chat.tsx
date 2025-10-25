@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { useChat } from 'ai/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
@@ -9,16 +8,93 @@ import { MessageCircle, X, Send, Loader2, Sparkles } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { gsap } from 'gsap'
 
+interface Message {
+  id: string
+  role: 'user' | 'assistant'
+  content: string
+}
+
 export function AIChat() {
   const [isOpen, setIsOpen] = useState(false)
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: '/api/chat',
-  })
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
 
-  // Auto-scroll to bottom when new messages arrive
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: input.trim(),
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+    setInput('')
+    setIsLoading(true)
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [...messages, userMessage] }),
+      })
+
+      if (!response.ok) throw new Error('Failed to get response')
+
+      const reader = response.body?.getReader()
+      const decoder = new TextDecoder()
+      let assistantMessage = ''
+
+      const assistantId = (Date.now() + 1).toString()
+      setMessages((prev) => [
+        ...prev,
+        { id: assistantId, role: 'assistant', content: '' },
+      ])
+
+      while (reader) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value)
+        const lines = chunk.split('\n')
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const data = JSON.parse(line.slice(6))
+              assistantMessage += data.content
+              setMessages((prev) =>
+                prev.map((msg) =>
+                  msg.id === assistantId
+                    ? { ...msg, content: assistantMessage }
+                    : msg
+                )
+              )
+            } catch (e) {
+              // Skip invalid JSON
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Chat error:', error)
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          role: 'assistant',
+          content: 'Sorry, I encountered an error. Please try again.',
+        },
+      ])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
@@ -109,11 +185,7 @@ export function AIChat() {
                       {suggestedQuestions.map((question, i) => (
                         <button
                           key={i}
-                          onClick={() => {
-                            handleInputChange({
-                              target: { value: question },
-                            } as any)
-                          }}
+                          onClick={() => setInput(question)}
                           className="block w-full text-left text-xs p-2 rounded-lg bg-background hover:bg-primary/10 transition-colors border border-border"
                         >
                           {question}
@@ -164,7 +236,7 @@ export function AIChat() {
               >
                 <Input
                   value={input}
-                  onChange={handleInputChange}
+                  onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about Omkar's work..."
                   disabled={isLoading}
                   className="flex-1"

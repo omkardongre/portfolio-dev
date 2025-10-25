@@ -1,0 +1,62 @@
+# OMKAR DONGRE
+SOFTWARE ENGINEER | FULL-STACK DEVELOPER
+
+Pune, India | omkardongre5@gmail.com
+
+---
+
+## PROFILE
+
+Software Engineer with 2.5+ years building distributed systems and full-stack applications. Specialized in Go/C++ backend development with hands-on experience in network security, protocol optimization, and database systems. Recently expanded expertise in modern full-stack stack (Next.js, React, Angular). Published researcher in Computer Vision with proven track record in system performance optimization and open-source contributions.
+
+---
+
+## TECHNICAL SKILLS
+
+| Go | TypeScript | React | Microservices | RESTful APIs |
+| C | C++ | Angular | Docker | Linux |
+| Python | SQL | Express.js | gRPC | MSSQL |
+| JavaScript | Next.js | NestJS | WebSocket | MSSQL |
+
+---
+
+## PROFESSIONAL EXPERIENCE
+
+### Data Plane Team Engineer, Sandvine Networks
+**2021 — 2023**
+
+- Designed centralized Go-based microservices for real-time threat detection across distributed network devices using WebSocket connections and concurrent data aggregation
+- Optimized session context protocol reducing CPU/memory overhead in PRE-MPE device communication
+- Resolved critical production bugs across multiple APIs affecting file handling and performance, ensuring backward compatibility with legacy systems
+- Implemented YANG data modeling for network configuration (LACP, VLAN) and developed Docker containerization for security services deployment
+
+### Software Engineering Intern, Bentley Systems
+**2021**
+
+- Led Oracle to MSSQL database migration reducing operational costs while optimizing SQL queries and ensuring data integrity
+- Enhanced automation testing framework for ALIM platform using Selenium and JMeter; improved test accuracy and coverage
+- Conducted performance testing of enterprise web applications and collaborated with dev teams on QA protocols
+
+---
+
+## RECENT DEVELOPMENT & OPEN SOURCE
+
+### Full-Stack Development & Contributions
+**2025 — Present**
+
+- Active contributor to Trigger.dev; demonstrated ability to work with complex production codebases
+
+---
+
+## EDUCATION
+
+### Pimpri Chinchwad College of Engineering
+**2017 — 2021**
+
+B.E. Information Technology
+
+---
+
+## ADDITIONAL INFORMATION
+
+- Links: LinkedIn, GitHub, Portfolio

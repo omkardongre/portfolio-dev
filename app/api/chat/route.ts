@@ -1,16 +1,23 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { StreamingTextResponse, GoogleGenerativeAIStream } from 'ai'
 import portfolioData from '../knowledge/portfolio-data.json'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || '')
 
-// Create system prompt with portfolio knowledge
+// Load resume data
+const resumePath = join(process.cwd(), 'app/api/knowledge/resume')
+const resumeData = readFileSync(resumePath, 'utf-8')
+
 const systemPrompt = `You are an AI assistant for Omkar Dongre's portfolio website. You are helpful, professional, and knowledgeable about Omkar's work.
 
 Your knowledge base:
 ${JSON.stringify(portfolioData, null, 2)}
+
+Omkar's Resume:
+${resumeData}
 
 Guidelines:
 1. Answer questions about Omkar's skills, projects, and experience based on the knowledge base
@@ -22,12 +29,6 @@ Guidelines:
 7. Use technical terms when appropriate but explain them if needed
 8. Always refer to Omkar in the third person (e.g., "Omkar has expertise in...")
 
-Example responses:
-- "What technologies does Omkar know?" → List skills from knowledge base, highlight specialties
-- "Tell me about SocialHub" → Describe the project, tech stack, and key features
-- "Is Omkar available for work?" → Yes, actively seeking backend/fullstack roles
-- "What's Omkar's experience?" → 2+ years at Sandvine and Bentley Systems, C++ and fullstack development
-
 Remember: You represent Omkar professionally. Be helpful, accurate, and encourage meaningful connections.
 `
 
@@ -35,20 +36,30 @@ export async function POST(req: Request) {
   try {
     const { messages } = await req.json()
 
-    // Get the last user message
     const lastMessage = messages[messages.length - 1]
-    
-    // Combine system prompt with user message
     const prompt = `${systemPrompt}\n\nUser: ${lastMessage.content}\n\nAssistant:`
 
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
-
     const result = await model.generateContentStream(prompt)
 
-    // Convert to AI SDK stream
-    const stream = GoogleGenerativeAIStream(result)
+    const encoder = new TextEncoder()
+    const stream = new ReadableStream({
+      async start(controller) {
+        for await (const chunk of result.stream) {
+          const text = chunk.text()
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content: text })}\n\n`))
+        }
+        controller.close()
+      },
+    })
 
-    return new StreamingTextResponse(stream)
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+      },
+    })
   } catch (error) {
     console.error('Chat API error:', error)
     return new Response(
