@@ -64,6 +64,8 @@
     "react-day-picker": "latest",
     "react-dom": "^18",
     "react-hook-form": "latest",
+    "react-hot-toast": "^2.6.0",
+    "react-intersection-observer": "^9.16.0",
     "react-resizable-panels": "latest",
     "recharts": "latest",
     "resend": "latest",
@@ -72,6 +74,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.180.0",
     "vaul": "latest",
+    "web-vitals": "^5.1.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
