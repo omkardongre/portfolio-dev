@@ -34,6 +34,7 @@ import { ContactForm } from "@/components/contact-form";
 import { HeroSection } from "@/components/hero-section";
 import { AnimatedProjectCard } from "@/components/animated-project-card";
 import { AIChat } from "@/components/ai-chat";
+import { JobMatchAnalyzer } from "@/components/job-match-analyzer";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
@@ -52,6 +53,7 @@ export default function Portfolio() {
         "opensource",
         "skills",
         "resume",
+        "job-match",
         "contact",
       ];
       const scrollPosition = window.scrollY + 100;
@@ -381,6 +383,7 @@ export default function Portfolio() {
                 tech={project.tech}
                 github={project.github}
                 demo={project.demo}
+                slug={project.slug}
                 index={index}
               />
             ))}
@@ -586,21 +589,45 @@ export default function Portfolio() {
                   Get a detailed overview of my experience, skills, and
                   achievements.
                 </p>
-                <Button
-                  size="lg"
-                  className="px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                  onClick={() => {
-                    const link = document.createElement("a");
-                    link.href = "/resume/omkar-dongre-resume.pdf";
-                    link.download = "Omkar-Dongre-Resume.pdf";
-                    link.click();
-                  }}
+                <a
+                  href="/resume.pdf"
+                  download="Omkar-Dongre-Resume.pdf"
+                  className="inline-flex items-center justify-center px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-lg"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Download Resume
-                </Button>
+                </a>
               </CardContent>
             </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Job Match Analyzer Section */}
+      <section id="job-match" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-6">Job Match Analyzer</h2>
+            <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Recruiters: Paste a job posting to see how well Omkar matches your role. 
+              Get instant AI-powered analysis with skill matching and recommendations.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <JobMatchAnalyzer />
           </motion.div>
         </div>
       </section>
