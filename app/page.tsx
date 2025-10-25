@@ -33,6 +33,7 @@ import { GitHubStats } from "@/components/github-stats";
 import { ContactForm } from "@/components/contact-form";
 import { HeroSection } from "@/components/hero-section";
 import { AnimatedProjectCard } from "@/components/animated-project-card";
+import { AIChat } from "@/components/ai-chat";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
@@ -744,6 +745,9 @@ export default function Portfolio() {
           </div>
         </div>
       </footer>
+
+      {/* AI Chat Assistant */}
+      <AIChat />
     </div>
   );
 }
