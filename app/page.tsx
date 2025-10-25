@@ -31,6 +31,8 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { GitHubStats } from "@/components/github-stats";
 import { ContactForm } from "@/components/contact-form";
+import { HeroSection } from "@/components/hero-section";
+import { AnimatedProjectCard } from "@/components/animated-project-card";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
@@ -123,62 +125,8 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section
-        id="home"
-        className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      >
-        <motion.div
-          style={{ y }}
-          className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20"
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-8"
-            >
-              <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-                OD
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-4">
-                Omkar Dongre
-              </h1>
-              <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6">
-                Fullstack Developer | Software Engineer
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Ex-Sandvine engineer building scalable systems & fullstack apps
-                using C++, Next.js, and Node.js.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Button
-                size="lg"
-                onClick={() => scrollToSection("projects")}
-                className="px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                View My Work
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => scrollToSection("contact")}
-                className="px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Get In Touch
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with GSAP + 3D */}
+      <HeroSection onNavigate={scrollToSection} />
 
       {/* About Section */}
       <section id="about" className="py-20">
@@ -425,56 +373,15 @@ export default function Portfolio() {
                 demo: "https://restaurant.omkard.site/",
               },
             ].map((project, index) => (
-              <motion.div
+              <AnimatedProjectCard
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                  <div className="relative overflow-hidden rounded-t-lg">
-                    <img
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
-                      {project.name}
-                    </CardTitle>
-                    <CardDescription>{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map((tech, techIndex) => (
-                        <Badge
-                          key={techIndex}
-                          variant="secondary"
-                          className="text-xs"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="flex gap-2">
-                      <Link href={`/projects/${project.slug}`}>
-                        <Button size="sm" className="flex-1">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          View Details
-                        </Button>
-                      </Link>
-                      <Link href={project.github}>
-                        <Button size="sm" variant="outline">
-                          <Github className="w-4 h-4" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                title={project.name}
+                description={project.description}
+                tech={project.tech}
+                github={project.github}
+                demo={project.demo}
+                index={index}
+              />
             ))}
           </div>
         </div>
