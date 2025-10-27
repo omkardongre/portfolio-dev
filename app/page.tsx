@@ -31,12 +31,8 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { GitHubStats } from "@/components/github-stats";
 import { ContactForm } from "@/components/contact-form";
-import { HeroSection } from "@/components/hero-section";
-import { AnimatedProjectCard } from "@/components/animated-project-card";
 import { AIChat } from "@/components/ai-chat";
 import { JobMatchAnalyzer } from "@/components/job-match-analyzer";
-import { PageLoader } from "@/components/page-loader";
-import { FeaturedProjectCard } from "@/components/featured-project-card";
 import { MobileMenu } from "@/components/mobile-menu";
 
 export default function Portfolio() {
@@ -162,11 +158,7 @@ export default function Portfolio() {
 
   return (
     <>
-      <PageLoader onComplete={() => setShowContent(true)} />
-      <div 
-        className="min-h-screen bg-background text-foreground" 
-        style={{ opacity: showContent ? 1 : 0, transition: 'opacity 0.5s' }}
-      >
+      <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -208,8 +200,35 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Hero Section with GSAP + 3D */}
-      <HeroSection onNavigate={scrollToSection} />
+      {/* Hero Section */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center">
+            <div className="mb-8">
+              <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-2xl">
+                OD
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+                Omkar Dongre
+              </h1>
+              <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 font-medium">
+                Fullstack Developer | Software Engineer
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Ex-Sandvine engineer building scalable systems & fullstack apps using C++, Next.js, and Node.js.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" onClick={() => scrollToSection('projects')} className="px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                View My Work
+              </Button>
+              <Button variant="outline" size="lg" onClick={() => scrollToSection('contact')} className="px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                Get In Touch
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* About Section */}
       <section ref={aboutRef} id="about" className="py-20">
@@ -456,16 +475,37 @@ export default function Portfolio() {
                 demo: "https://restaurant.omkard.site/",
               },
             ].map((project, index) => (
-              <AnimatedProjectCard
-                key={index}
-                title={project.name}
-                description={project.description}
-                tech={project.tech}
-                github={project.github}
-                demo={project.demo}
-                slug={project.slug}
-                index={index}
-              />
+              <Card key={index} className="h-full backdrop-blur-sm bg-card/50 border-border/50 hover:border-primary/50 transition-colors">
+                <CardHeader>
+                  <CardTitle>{project.name}</CardTitle>
+                  <CardDescription>{project.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((t) => (
+                      <Badge key={t} variant="secondary">{t}</Badge>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.github && (
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={project.github} target="_blank">
+                          <Github className="w-4 h-4 mr-2" />
+                          Code
+                        </Link>
+                      </Button>
+                    )}
+                    {project.demo && (
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={project.demo} target="_blank">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Demo
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>

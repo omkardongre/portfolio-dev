@@ -2,9 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
-import { useGSAP } from '@/lib/gsap';
-import { gsap } from 'gsap';
-import { PageLoader } from '@/components/page-loader';
 import Link from "next/link";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
@@ -47,7 +44,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { HeroBackground } from "@/components/hero-background";
 
 const projectsData = {
   socialhub: {

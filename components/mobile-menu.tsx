@@ -125,7 +125,7 @@ export function MobileMenu({ activeSection, onNavigate }: MobileMenuProps) {
                 {/* Footer */}
                 <div className="p-4 border-t border-border">
                   <p className="text-xs text-muted-foreground text-center">
-                    © 2024 Omkar Dongre
+                    © 2025 Omkar Dongre
                   </p>
                 </div>
               </div>
