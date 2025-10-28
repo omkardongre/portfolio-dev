@@ -1,26 +1,27 @@
 # 🚀 Modern Interactive Developer Portfolio
 
-A stunning, interactive developer portfolio showcasing projects, skills, and experience with smooth animations and modern design.
+A professional, interactive developer portfolio showcasing projects, skills, and experience with smooth transitions and modern design.
 
 ## ✨ Features
 
 ### 📄 Core Sections
-- **Home Page** - Animated hero with canvas particles
+- **Home Page** - Hero section with smooth animations
 - **Projects** - Showcase with live demos and tech stacks
 - **Skills** - Tech stack display with visual indicators
 - **Contact** - Functional form with validation
+- **Experience** - Detailed company pages with tabs (Overview, Projects, Achievements, Skills, Learning)
 
-### 🎨 Design & Animations
-- 60fps canvas particle effects
+### 🎨 Design & Interactivity
 - Smooth page transitions with Framer Motion
 - Dark/Light mode toggle
-- Fully responsive design
-- Modern glassmorphism UI
+- Fully responsive design (mobile, tablet, desktop)
+- Modern UI with glassmorphism effects
+- Interactive hover states and transitions
 
 ### 🚀 Bonus Features
 - AI chat assistant for portfolio Q&A
 - Job match analyzer tool
-- Performance monitoring (FPS, Web Vitals)
+- GitHub stats integration
 - Toast notifications
 
 ## 🛠️ Tech Stack
@@ -28,8 +29,8 @@ A stunning, interactive developer portfolio showcasing projects, skills, and exp
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS + shadcn/ui
-- **Animations:** Framer Motion + Canvas API
-- **AI:** Google Gemini 2.0 Flash (optional features)
+- **Animations:** Framer Motion
+- **AI:** Google Gemini 2.0 Flash (optional)
 - **Deployment:** Vercel
 
 ## 🚀 Getting Started

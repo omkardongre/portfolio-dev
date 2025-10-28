@@ -89,7 +89,7 @@ export function JobMatchAnalyzer() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-4xl mx-auto">
       <Card className="shadow-lg">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

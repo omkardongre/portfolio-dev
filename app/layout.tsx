@@ -8,10 +8,6 @@ export const metadata: Metadata = {
   title: "Omkar Dongre - Portfolio",
   description: "Fullstack Developer | Software Engineer - Portfolio showcasing projects and experience",
   generator: "v0.dev",
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -27,6 +23,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
 }
 
 export default function RootLayout({

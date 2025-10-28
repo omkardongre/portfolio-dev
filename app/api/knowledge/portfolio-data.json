@@ -2,7 +2,7 @@
   "about": {
     "name": "Omkar Dongre",
     "title": "Fullstack Developer | Software Engineer",
-    "bio": "Ex-Sandvine engineer with 2+ years of experience building scalable systems & fullstack apps using C++, Next.js, and Node.js. Strong foundation in C/C++ development and system-level programming.",
+    "bio": "Ex-Sandvine engineer with 2+ years of experience designing network security systems, threat detection engines, and scalable microservices. Strong foundation in Go, C++, and system-level programming. Currently building fullstack applications with modern web technologies.",
     "experience_years": 2,
     "location": "India",
     "email": "contact available on portfolio",
@@ -13,30 +13,51 @@
     {
       "company": "Sandvine",
       "role": "Software Engineer",
-      "duration": "2+ years",
-      "description": "Built data plane systems and database automation. Worked with C/C++ development and system-level programming. Developed Python and Bash scripting solutions."
+      "duration": "2021 - 2023",
+      "description": "Designed and implemented network security and threat detection systems. Developed Go microservices for real-time threat detection across distributed network devices. Optimized network protocols and implemented system diagnostics monitoring with Python APIs."
     },
     {
       "company": "Bentley Systems",
-      "role": "Software Engineer",
-      "description": "Worked on system-level programming and database automation projects."
+      "role": "Software Engineering Intern",
+      "duration": "Jan 2021 - Jul 2021",
+      "description": "Led Oracle to MSSQL database migration project reducing operational costs. Developed comprehensive Selenium-based test automation frameworks for ALIM platform. Implemented automated reporting systems and optimized JMeter performance testing scripts."
     }
   ],
   "skills": {
     "languages": ["C/C++", "JavaScript", "TypeScript", "Python", "Bash"],
-    "frontend": ["React", "Next.js", "Tailwind CSS", "shadcn/ui", "Framer Motion", "GSAP"],
+    "frontend": [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Framer Motion",
+      "GSAP"
+    ],
     "backend": ["Node.js", "Express.js", "NestJS"],
     "databases": ["MongoDB", "PostgreSQL", "Prisma"],
     "cloud": ["AWS (ECS, S3)", "Vercel", "Render", "Cloudinary"],
     "tools": ["Docker", "Git", "RabbitMQ", "Socket.IO"],
     "ai_ml": ["Google Gemini", "AssemblyAI", "Voiceflow"],
-    "specialties": ["Fullstack Development", "System Programming", "Microservices", "Real-time Applications", "Cloud Deployment"]
+    "specialties": [
+      "Fullstack Development",
+      "System Programming",
+      "Microservices",
+      "Real-time Applications",
+      "Cloud Deployment"
+    ]
   },
   "projects": [
     {
       "name": "SocialHub",
       "description": "Microservices-based social media platform with real-time chat, notifications, media uploads, and activity feeds. Features scalable, event-driven architecture, automated cloud deployment, and robust CI/CD for high reliability and easy extensibility.",
-      "tech_stack": ["Next.js", "NestJS", "Express.js", "Docker", "AWS ECS", "RabbitMQ"],
+      "tech_stack": [
+        "Next.js",
+        "NestJS",
+        "Express.js",
+        "Docker",
+        "AWS ECS",
+        "RabbitMQ"
+      ],
       "highlights": [
         "Microservices architecture with event-driven design",
         "Real-time chat and notifications",
@@ -49,7 +70,18 @@
     {
       "name": "Video Sharing Platform",
       "description": "Cross-platform video sharing platform with real-time recording, uploads, AI transcription and summaries, dynamic CMS management, secure cloud storage, team collaboration, notifications, and an integrated AI chatbot.",
-      "tech_stack": ["Next.js", "Electron", "Node.js", "Socket.IO", "AWS S3", "Prisma", "AssemblyAI", "Google Gemini", "Voiceflow", "WIX CMS"],
+      "tech_stack": [
+        "Next.js",
+        "Electron",
+        "Node.js",
+        "Socket.IO",
+        "AWS S3",
+        "Prisma",
+        "AssemblyAI",
+        "Google Gemini",
+        "Voiceflow",
+        "WIX CMS"
+      ],
       "highlights": [
         "Cross-platform desktop app with Electron",
         "AI-powered transcription and summaries",
@@ -62,7 +94,17 @@
     {
       "name": "Food Ordering App",
       "description": "A Food ordering platform where users can browse restaurants, add menu items to cart, place orders, and pay online. Restaurant owners can manage their restaurant profile, menus, and track incoming orders in real time.",
-      "tech_stack": ["React", "Express.js", "TypeScript", "MongoDB Atlas", "Stripe", "Auth0", "Cloudinary", "Vercel", "Render"],
+      "tech_stack": [
+        "React",
+        "Express.js",
+        "TypeScript",
+        "MongoDB Atlas",
+        "Stripe",
+        "Auth0",
+        "Cloudinary",
+        "Vercel",
+        "Render"
+      ],
       "highlights": [
         "Full e-commerce functionality with Stripe payments",
         "Real-time order tracking",
@@ -76,12 +118,21 @@
   ],
   "seeking": {
     "roles": ["Backend Developer", "Fullstack Developer", "Software Engineer"],
-    "interests": ["Building robust, scalable systems", "Modern web development", "System-level programming", "Cloud architecture"],
+    "interests": [
+      "Building robust, scalable systems",
+      "Modern web development",
+      "System-level programming",
+      "Cloud architecture"
+    ],
     "availability": "Actively seeking opportunities"
   },
   "personality": {
     "tone": "Professional yet approachable",
     "communication_style": "Clear, concise, and technical when needed",
-    "strengths": ["Bridging low-level system knowledge with high-level application development", "Scalable architecture design", "Full-stack versatility"]
+    "strengths": [
+      "Bridging low-level system knowledge with high-level application development",
+      "Scalable architecture design",
+      "Full-stack versatility"
+    ]
   }
 }
