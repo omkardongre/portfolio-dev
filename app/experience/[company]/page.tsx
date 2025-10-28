@@ -209,9 +209,16 @@ const experienceData = {
       },
       {
         name: "ALIM Web Application Test Automation Enhancement",
-        description: "Enhanced existing Selenium-based testing framework for Asset Lifecycle Information Management web application with improved test coverage and automation",
-        technologies: ["Selenium WebDriver", "JMeter", "HTML Reporting", "Automation Testing"],
-        impact: "Enhanced test coverage and accuracy for critical infrastructure management platform",
+        description:
+          "Enhanced existing Selenium-based testing framework for Asset Lifecycle Information Management web application with improved test coverage and automation",
+        technologies: [
+          "Selenium WebDriver",
+          "JMeter",
+          "HTML Reporting",
+          "Automation Testing",
+        ],
+        impact:
+          "Enhanced test coverage and accuracy for critical infrastructure management platform",
         details: [
           "Enhanced existing automation testing framework for ALIM web application",
           "Developed and maintained comprehensive test suites for critical functionality",
@@ -313,7 +320,7 @@ export default function ExperienceDetail({
               </Button>
               <Button size="sm" asChild>
                 <a
-                  href="https://linkedin.com/in/omkardongre"
+                  href="https://www.linkedin.com/in/omkar-dongre-133942151"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -409,7 +416,10 @@ export default function ExperienceDetail({
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList aria-label="Experience sections" className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-8">
+            <TabsList
+              aria-label="Experience sections"
+              className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-8"
+            >
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="projects">Projects</TabsTrigger>
               <TabsTrigger value="achievements">Achievements</TabsTrigger>

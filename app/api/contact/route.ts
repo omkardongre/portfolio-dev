@@ -1,25 +1,28 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { Resend } from "resend"
+import { type NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
-    console.log("Contact API called")
-    console.log("Resend API Key exists:", !!process.env.RESEND_API_KEY)
+    console.log("Contact API called");
+    console.log("Resend API Key exists:", !!process.env.RESEND_API_KEY);
 
-    const body = await request.json()
-    console.log("Form data received:", body)
+    const body = await request.json();
+    console.log("Form data received:", body);
 
-    const { name, email, company, subject, inquiryType, message } = body
+    const { name, email, company, subject, inquiryType, message } = body;
 
     // Validate required fields
     if (!name || !email || !subject || !inquiryType || !message) {
-      console.log("Missing required fields")
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+      console.log("Missing required fields");
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
-    console.log("Attempting to send notification email...")
+    console.log("Attempting to send notification email...");
 
     // Send notification email to you
     const notificationEmail = await resend.emails.send({
@@ -53,11 +56,11 @@ export async function POST(request: NextRequest) {
           </div>
         </div>
       `,
-    })
+    });
 
-    console.log("Notification email result:", notificationEmail)
+    console.log("Notification email result:", notificationEmail);
 
-    console.log("Attempting to send confirmation email...")
+    console.log("Attempting to send confirmation email...");
 
     // Send confirmation email to the user
     const confirmationEmail = await resend.emails.send({
@@ -91,7 +94,7 @@ export async function POST(request: NextRequest) {
           <p style="font-size: 16px; line-height: 1.6; color: #555;">
             In the meantime, feel free to check out my latest projects on 
             <a href="https://github.com/omkardongre" style="color: #007bff;">GitHub</a> or connect with me on 
-            <a href="https://linkedin.com/in/omkardongre" style="color: #007bff;">LinkedIn</a>.
+            <a href="https://www.linkedin.com/in/omkar-dongre-133942151" style="color: #007bff;">LinkedIn</a>.
           </p>
           
           <p style="font-size: 16px; line-height: 1.6; color: #555;">
@@ -107,23 +110,23 @@ export async function POST(request: NextRequest) {
           </div>
         </div>
       `,
-    })
+    });
 
-    console.log("Confirmation email result:", confirmationEmail)
+    console.log("Confirmation email result:", confirmationEmail);
 
     return NextResponse.json({
       message: "Email sent successfully",
       notificationId: notificationEmail.data?.id,
       confirmationId: confirmationEmail.data?.id,
-    })
+    });
   } catch (error) {
-    console.error("Error sending email:", error)
+    console.error("Error sending email:", error);
     return NextResponse.json(
       {
         error: "Failed to send email",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 },
-    )
+      { status: 500 }
+    );
   }
 }

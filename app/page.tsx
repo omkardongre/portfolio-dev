@@ -311,7 +311,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-
         {/* Journey Section */}
         <section ref={journeyRef} id="journey" className="py-20 bg-muted/50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -678,7 +677,6 @@ export default function Portfolio() {
                     <div className="text-5xl group-hover:scale-110 transition-transform duration-300">
                       ⚙️
                     </div>
-                    <GitBranch className="w-6 h-6 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <CardTitle className="text-3xl group-hover:text-primary transition-colors mb-2">
                     Trigger.dev
@@ -710,7 +708,11 @@ export default function Portfolio() {
                       <span className="text-primary">→</span> My Contributions
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-Enhanced the trigger.dev core engine by improving concurrency management and refining stack trace clarity for better error reporting. Addressed critical database build and deployment issues while contributing to overall code quality and maintainability.
+                      Enhanced the trigger.dev core engine by improving
+                      concurrency management and refining stack trace clarity
+                      for better error reporting. Addressed critical database
+                      build and deployment issues while contributing to overall
+                      code quality and maintainability.
                     </p>
                   </div>
                   <Button
@@ -737,7 +739,7 @@ Enhanced the trigger.dev core engine by improving concurrency management and ref
               viewport={{ once: true }}
               className="text-center"
             >
-              <Card className="shadow-lg border-border/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm">
+              {/* <Card className="shadow-lg border-border/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold mb-4">
                     Open to Collaboration
@@ -758,7 +760,7 @@ Enhanced the trigger.dev core engine by improving concurrency management and ref
                     </a>
                   </Button>
                 </CardContent>
-              </Card>
+              </Card> */}
             </motion.div>
           </div>
         </section>
@@ -980,8 +982,8 @@ Enhanced the trigger.dev core engine by improving concurrency management and ref
                     {
                       icon: <Mail className="w-6 h-6" />,
                       title: "Email",
-                      content: "omkar.dongre@email.com",
-                      link: "mailto:omkar.dongre@email.com",
+                      content: "omkardongre5@gmail.com",
+                      link: "mailto:omkardongre5@gmail.com",
                       description: "Best for detailed discussions",
                     },
                     {
@@ -994,8 +996,8 @@ Enhanced the trigger.dev core engine by improving concurrency management and ref
                     {
                       icon: <Linkedin className="w-6 h-6" />,
                       title: "LinkedIn",
-                      content: "linkedin.com/in/omkardongre",
-                      link: "https://linkedin.com/in/omkardongre",
+                      content: "linkedin.com/in/omkar-dongre",
+                      link: "https://www.linkedin.com/in/omkar-dongre-133942151",
                       description: "Professional networking",
                     },
                   ].map((contact, index) => (
@@ -1044,7 +1046,7 @@ Enhanced the trigger.dev core engine by improving concurrency management and ref
               </p>
               <div className="flex justify-center space-x-6 mb-8">
                 <a
-                  href="mailto:omkar.dongre@email.com"
+                  href="mailto:omkardongre5@gmail.com"
                   className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 >
                   <Mail className="w-6 h-6" />
@@ -1056,7 +1058,7 @@ Enhanced the trigger.dev core engine by improving concurrency management and ref
                   <Github className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/omkardongre"
+                  href="https://www.linkedin.com/in/omkar-dongre-133942151"
                   className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 >
                   <Linkedin className="w-6 h-6" />
