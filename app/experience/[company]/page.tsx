@@ -409,7 +409,7 @@ export default function ExperienceDetail({
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-5 mb-8">
+            <TabsList aria-label="Experience sections" className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-8">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="projects">Projects</TabsTrigger>
               <TabsTrigger value="achievements">Achievements</TabsTrigger>

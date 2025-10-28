@@ -44,6 +44,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PageLoader } from "@/components/page-loader";
 
 const projectsData = {
   socialhub: {
@@ -452,71 +453,14 @@ export default function ProjectDetail({
 }) {
   const [activeImage, setActiveImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const project = projectsData[params.slug as keyof typeof projectsData];
-  const headerRef = useRef<HTMLDivElement>(null);
-  const featuresRef = useRef<HTMLDivElement>(null);
-  const architectureRef = useRef<HTMLDivElement>(null);
-  const challengesRef = useRef<HTMLDivElement>(null);
 
-  // GSAP animations
-  useGSAP(() => {
-    if (!showContent) return;
-    
-    if (headerRef.current) {
-      gsap.from(headerRef.current.children, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out',
-      });
-    }
-
-    if (featuresRef.current) {
-      gsap.from(featuresRef.current.children, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: featuresRef.current,
-          start: 'top 80%',
-        },
-      });
-    }
-  }, [showContent]);
-
-  // ScrollReveal for sections
   useEffect(() => {
-    if (!showContent || typeof window === 'undefined') return;
-
-    // Dynamically import ScrollReveal only on client
-    import('scrollreveal').then((ScrollReveal) => {
-      const sr = ScrollReveal.default();
-      
-      const srConfig = {
-        origin: 'bottom',
-        distance: '20px',
-        duration: 600,
-        delay: 200,
-        opacity: 0,
-        easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
-        reset: false,
-      };
-      
-      const refs = [architectureRef, challengesRef];
-      refs.forEach((ref, index) => {
-        if (ref.current) {
-          sr.reveal(ref.current, {
-            ...srConfig,
-            delay: 200 + index * 100,
-          });
-        }
-      });
-    });
-  }, [showContent]);
+    // Simulate loading delay for smooth transition
+    const timer = setTimeout(() => setIsLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Keyboard navigation for lightbox
   const handleLightboxKey = useCallback(
@@ -567,12 +511,13 @@ export default function ProjectDetail({
 
   return (
     <>
-      <PageLoader onComplete={() => setShowContent(true)} />
-      <div 
+      {isLoading && <PageLoader />}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.5 }}
         className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative"
-        style={{ opacity: showContent ? 1 : 0, transition: 'opacity 0.5s' }}
       >
-      <HeroBackground />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -615,7 +560,7 @@ export default function ProjectDetail({
       {/* Hero Section */}
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div ref={headerRef} className="text-center mb-16">
+          <div className="text-center mb-16">
             <div className="flex justify-center items-center gap-4 mb-6">
               <Badge variant="secondary" className="text-sm">
                 {project.category}
@@ -696,12 +641,20 @@ export default function ProjectDetail({
             <div
               className="mb-8 flex justify-center cursor-zoom-in"
               onClick={() => setLightboxOpen(true)}
+              role="button"
+              aria-label="Open image lightbox"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setLightboxOpen(true)
+              }}
             >
               <img
                 src={project.images[activeImage] || "/placeholder.svg"}
                 alt={`${project.name} screenshot ${activeImage + 1}`}
                 className="max-w-full h-96 object-contain rounded-xl shadow-2xl"
                 style={{ transition: "box-shadow 0.2s" }}
+                loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -764,6 +717,8 @@ export default function ProjectDetail({
                     src={image || "/placeholder.svg"}
                     alt={`${project.name} thumbnail ${index + 1}`}
                     className="w-full h-24 object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                   {activeImage === index && (
                     <div className="absolute inset-0 bg-blue-500/20"></div>
@@ -848,7 +803,7 @@ export default function ProjectDetail({
             </TabsContent>
 
             <TabsContent value="features" className="space-y-8">
-              <div ref={featuresRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {project.features.map((feature, index) => (
                   <Card
                     key={index}
@@ -875,7 +830,6 @@ export default function ProjectDetail({
             </TabsContent>
 
             <TabsContent value="architecture" className="space-y-8">
-              <div ref={architectureRef}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -910,11 +864,9 @@ export default function ProjectDetail({
                   </CardContent>
                 </Card>
               </motion.div>
-              </div>
             </TabsContent>
 
             <TabsContent value="challenges" className="space-y-8">
-              <div ref={challengesRef}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -949,7 +901,6 @@ export default function ProjectDetail({
                   </Card>
                 ))}
               </motion.div>
-              </div>
             </TabsContent>
           </Tabs>
         </div>
@@ -1002,7 +953,7 @@ export default function ProjectDetail({
           </div>
         </section>
       )} */}
-    </div>
+      </motion.div>
     </>
   );
 }
