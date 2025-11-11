@@ -472,56 +472,73 @@ export default function ExperienceDetail({
                 className="space-y-6"
               >
                 {experience.majorProjects.map((project, index) => (
-                  <Card key={index} className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="text-xl text-primary group-hover:text-primary transition-colors">
-                        {project.name}
-                      </CardTitle>
-                      <CardDescription className="text-base">
-                        {project.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4 relative z-10">
-                      <div>
-                        <h4 className="font-semibold mb-2">
-                          Technologies Used:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.technologies.map((tech, techIndex) => (
-                            <Badge key={techIndex} variant="secondary">
-                              {tech}
-                            </Badge>
-                          ))}
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                      <CardHeader className="relative z-10 border-b border-border/30">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                              {project.name}
+                            </CardTitle>
+                            <CardDescription className="text-base mt-2">
+                              {project.description}
+                            </CardDescription>
+                          </div>
+                          <div className="text-3xl">🚀</div>
                         </div>
-                      </div>
+                      </CardHeader>
+                      <CardContent className="space-y-6 relative z-10 pt-6">
+                        <div>
+                          <h4 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                            <span className="text-primary">→</span> Technologies Used
+                          </h4>
+                          <div className="flex flex-wrap gap-2 ml-6">
+                            {project.technologies.map((tech, techIndex) => (
+                              <Badge key={techIndex} variant="secondary" className="group-hover:bg-primary/20 transition-colors">
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
 
-                      <div className="bg-primary/10 p-4 rounded-lg">
-                        <h4 className="font-semibold text-primary mb-2">
-                          Impact:
-                        </h4>
-                        <p className="text-muted-foreground">
-                          {project.impact}
-                        </p>
-                      </div>
+                        <div className="h-px bg-gradient-to-r from-border/0 via-border/50 to-border/0"></div>
 
-                      <div>
-                        <h4 className="font-semibold mb-2">Key Details:</h4>
-                        <ul className="space-y-1">
-                          {project.details.map((detail, detailIndex) => (
-                            <li
-                              key={detailIndex}
-                              className="flex items-start gap-2"
-                            >
-                              <span className="text-primary">•</span>
-                              <span className="text-muted-foreground text-sm">
-                                {detail}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </CardContent>
-                  </Card>
+                        <div className="bg-primary/5 border border-primary/20 p-4 rounded-lg">
+                          <h4 className="font-semibold text-lg text-primary mb-3 flex items-center gap-2">
+                            <span>💡</span> Impact
+                          </h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            {project.impact}
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                            <span className="text-primary">→</span> Key Details
+                          </h4>
+                          <ul className="space-y-2 ml-6">
+                            {project.details.map((detail, detailIndex) => (
+                              <li
+                                key={detailIndex}
+                                className="flex items-start gap-3"
+                              >
+                                <span className="text-primary font-bold mt-0.5">✓</span>
+                                <span className="text-muted-foreground leading-relaxed">
+                                  {detail}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
               </motion.div>
             </TabsContent>
@@ -542,15 +559,23 @@ export default function ExperienceDetail({
                   <CardContent className="relative z-10">
                     <div className="grid gap-4">
                       {experience.achievements.map((achievement, index) => (
-                        <div
+                        <motion.div
                           key={index}
-                          className="flex items-start gap-3 p-4 bg-muted/50 rounded-lg"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                          className="flex items-start gap-4 p-4 bg-gradient-to-r from-primary/5 to-primary/0 border border-primary/20 rounded-lg hover:border-primary/50 transition-colors"
                         >
-                          <TrendingUp className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-muted-foreground">
+                          <div className="flex-shrink-0 mt-1">
+                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary">
+                              <TrendingUp className="w-4 h-4" />
+                            </div>
+                          </div>
+                          <span className="text-muted-foreground leading-relaxed">
                             {achievement}
                           </span>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </CardContent>
@@ -573,13 +598,19 @@ export default function ExperienceDetail({
                   <CardContent className="relative z-10">
                     <div className="flex flex-wrap gap-3">
                       {experience.technicalSkills.map((skill, index) => (
-                        <Badge
+                        <motion.div
                           key={index}
-                          variant="outline"
-                          className="text-sm px-3 py-1"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
+                          viewport={{ once: true }}
                         >
-                          {skill}
-                        </Badge>
+                          <Badge
+                            className="text-sm px-4 py-2 bg-primary/10 text-primary border border-primary/30 hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer group-hover:scale-110"
+                          >
+                            {skill}
+                          </Badge>
+                        </motion.div>
                       ))}
                     </div>
                   </CardContent>
@@ -602,12 +633,19 @@ export default function ExperienceDetail({
                   <CardContent className="relative z-10">
                     <ul className="space-y-3">
                       {experience.learningOutcomes.map((outcome, index) => (
-                        <li key={index} className="flex items-start gap-3">
+                        <motion.li
+                          key={index}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                          className="flex items-start gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20 hover:border-primary/50 transition-colors"
+                        >
                           <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-muted-foreground">
+                          <span className="text-muted-foreground leading-relaxed">
                             {outcome}
                           </span>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   </CardContent>
@@ -619,7 +657,7 @@ export default function ExperienceDetail({
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-primary">
+      {/* <section className="py-16 bg-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -658,7 +696,7 @@ export default function ExperienceDetail({
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

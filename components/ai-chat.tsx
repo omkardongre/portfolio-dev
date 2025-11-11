@@ -141,10 +141,7 @@ export function AIChat() {
           {isOpen ? (
             <X className="w-6 h-6" />
           ) : (
-            <div className="relative">
-              <MessageCircle className="w-6 h-6" />
-              <Sparkles className="w-3 h-3 absolute -top-1 -right-1 text-yellow-300" />
-            </div>
+            <MessageCircle className="w-6 h-6" />
           )}
         </Button>
       </motion.div>

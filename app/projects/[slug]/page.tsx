@@ -805,26 +805,31 @@ export default function ProjectDetail({
             <TabsContent value="features" className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {project.features.map((feature, index) => (
-                  <Card
+                  <motion.div
                     key={index}
-                    className="shadow-lg hover:shadow-xl transition-shadow duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
                   >
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
-                          {feature.icon}
+                    <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden h-full">
+                      <CardHeader className="relative z-10">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 group-hover:scale-110">
+                            {feature.icon}
+                          </div>
+                          <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                            {feature.title}
+                          </CardTitle>
                         </div>
-                        <CardTitle className="text-xl">
-                          {feature.title}
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        {feature.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+                      </CardHeader>
+                      <CardContent className="relative z-10">
+                        <p className="text-muted-foreground leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
             </TabsContent>
@@ -874,31 +879,51 @@ export default function ProjectDetail({
                 className="space-y-6"
               >
                 {project.challenges.map((challenge, index) => (
-                  <Card key={index} className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="text-xl text-red-600 dark:text-red-400 group-hover:text-primary transition-colors">
-                        Challenge #{index + 1}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4 relative z-10">
-                      <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                          Problem:
-                        </h4>
-                        <p className="text-gray-700 dark:text-gray-300">
-                          {challenge.problem}
-                        </p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                          Solution:
-                        </h4>
-                        <p className="text-gray-700 dark:text-gray-300">
-                          {challenge.solution}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                      <CardHeader className="relative z-10 border-b border-border/30">
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-500/20 text-red-600 dark:text-red-400 font-bold group-hover:bg-red-500 group-hover:text-white transition-colors">
+                            {index + 1}
+                          </div>
+                          <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                            Challenge
+                          </CardTitle>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-6 relative z-10 pt-6">
+                        <div>
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-1 h-6 bg-red-500 rounded"></div>
+                            <h4 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                              Problem
+                            </h4>
+                          </div>
+                          <p className="text-muted-foreground leading-relaxed ml-3">
+                            {challenge.problem}
+                          </p>
+                        </div>
+                        <div className="h-px bg-gradient-to-r from-border/0 via-border/50 to-border/0"></div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-1 h-6 bg-green-500 rounded"></div>
+                            <h4 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                              Solution
+                            </h4>
+                          </div>
+                          <p className="text-muted-foreground leading-relaxed ml-3">
+                            {challenge.solution}
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
               </motion.div>
             </TabsContent>
