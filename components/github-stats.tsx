@@ -140,11 +140,11 @@ export function GitHubStats() {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <Card className="text-center shadow-lg hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <Code className="w-8 h-8 text-primary mx-auto mb-3" />
+          <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+            <CardContent className="p-6 relative z-10">
+              <Code className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <p className="text-sm text-muted-foreground mb-1">Repositories</p>
-              <p className="text-2xl font-bold">{stats?.public_repos || 0}</p>
+              <p className="text-2xl font-bold group-hover:text-primary transition-colors">{stats?.public_repos || 0}</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -155,11 +155,11 @@ export function GitHubStats() {
           transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          <Card className="text-center shadow-lg hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <Users className="w-8 h-8 text-primary mx-auto mb-3" />
+          <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+            <CardContent className="p-6 relative z-10">
+              <Users className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <p className="text-sm text-muted-foreground mb-1">Followers</p>
-              <p className="text-2xl font-bold">{stats?.followers || 0}</p>
+              <p className="text-2xl font-bold group-hover:text-primary transition-colors">{stats?.followers || 0}</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -170,11 +170,11 @@ export function GitHubStats() {
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <Card className="text-center shadow-lg hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <Activity className="w-8 h-8 text-primary mx-auto mb-3" />
+          <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+            <CardContent className="p-6 relative z-10">
+              <Activity className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <p className="text-sm text-muted-foreground mb-1">Following</p>
-              <p className="text-2xl font-bold">{stats?.following || 0}</p>
+              <p className="text-2xl font-bold group-hover:text-primary transition-colors">{stats?.following || 0}</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -185,11 +185,11 @@ export function GitHubStats() {
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <Card className="text-center shadow-lg hover:shadow-xl transition-shadow">
-            <CardContent className="p-6">
-              <Calendar className="w-8 h-8 text-primary mx-auto mb-3" />
+          <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+            <CardContent className="p-6 relative z-10">
+              <Calendar className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <p className="text-sm text-muted-foreground mb-1">Member Since</p>
-              <p className="text-2xl font-bold">{stats ? formatDate(stats.created_at) : "N/A"}</p>
+              <p className="text-2xl font-bold group-hover:text-primary transition-colors">{stats ? formatDate(stats.created_at) : "N/A"}</p>
             </CardContent>
           </Card>
         </motion.div>
@@ -202,15 +202,15 @@ export function GitHubStats() {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3">
-              <TrendingUp className="w-6 h-6 text-primary" />
+        <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+          <CardHeader className="relative z-10">
+            <CardTitle className="flex items-center gap-3 group-hover:text-primary transition-colors">
+              <TrendingUp className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
               Contribution Activity
             </CardTitle>
             <CardDescription>GitHub contribution graph for the past year</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="relative z-10">
             <div className="w-full overflow-x-auto">
               <img
                 src={`https://ghchart.rshah.org/${username}`}
@@ -240,15 +240,15 @@ export function GitHubStats() {
         transition={{ duration: 0.8, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3">
-              <GitBranch className="w-6 h-6 text-primary" />
+        <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+          <CardHeader className="relative z-10">
+            <CardTitle className="flex items-center gap-3 group-hover:text-primary transition-colors">
+              <GitBranch className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
               Recent Repositories
             </CardTitle>
             <CardDescription>Latest projects and contributions</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {repos.slice(0, 6).map((repo, index) => (
                 <motion.div

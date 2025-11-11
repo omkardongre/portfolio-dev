@@ -19,6 +19,7 @@ import {
   Star,
   Trophy,
   Award,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -52,6 +53,13 @@ export default function Portfolio() {
   const achievementsRef = useRef<HTMLElement>(null);
   const jobMatchRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
+
+  // State for tracking loading buttons
+  const [loadingButtons, setLoadingButtons] = useState<Set<string>>(new Set());
+
+  const handleButtonClick = (id: string) => {
+    setLoadingButtons(prev => new Set(prev).add(id));
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -216,7 +224,7 @@ export default function Portfolio() {
         {/* Hero Section */}
         <section
           id="home"
-          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-muted/50"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center">
@@ -257,7 +265,7 @@ export default function Portfolio() {
         </section>
 
         {/* About Section */}
-        <section ref={aboutRef} id="about" className="py-20">
+        <section ref={aboutRef} id="about" className="py-20 bg-muted/50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -397,9 +405,6 @@ export default function Portfolio() {
                           </div>
                         </div>
                       </CardHeader>
-                      {/* Gradient accent */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-full blur-2xl -mr-16 -mt-16"></div>
-                      
                       <CardContent className="relative z-10">
                         <div className="flex items-center gap-2 mb-3">
                           <Calendar className="w-4 h-4 text-muted-foreground" />
@@ -428,9 +433,19 @@ export default function Portfolio() {
                             size="sm"
                             variant="outline"
                             className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors bg-transparent"
+                            onClick={() => handleButtonClick(`experience-${item.slug}`)}
                           >
-                            View Details
-                            <ArrowRight className="w-4 h-4 ml-2" />
+                            {loadingButtons.has(`experience-${item.slug}`) ? (
+                              <>
+                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                Loading...
+                              </>
+                            ) : (
+                              <>
+                                View Details
+                                <ArrowRight className="w-4 h-4 ml-2" />
+                              </>
+                            )}
                           </Button>
                         </Link>
                       </CardContent>
@@ -446,7 +461,7 @@ export default function Portfolio() {
         </section>
 
         {/* Projects Section */}
-        <section ref={projectsRef} id="projects" className="py-20">
+        <section ref={projectsRef} id="projects" className="py-20 bg-muted/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -517,7 +532,6 @@ export default function Portfolio() {
                   ],
                   image: "/foodOrdering/foodOrdering-01.png",
                   github: "https://github.com/omkardongre/Food-Ordering-App",
-                  demo: "https://restaurant.omkard.site/",
                   icon: "🍕",
                 },
               ].map((project, index) => (
@@ -588,9 +602,22 @@ export default function Portfolio() {
                         )}
                       </div>
                       <Link href={`/projects/${project.slug}`}>
-                        <Button className="w-full mt-2" variant="default">
-                          View Details
-                          <ArrowRight className="w-4 h-4 ml-2" />
+                        <Button 
+                          className="w-full mt-2" 
+                          variant="default"
+                          onClick={() => handleButtonClick(`project-${project.slug}`)}
+                        >
+                          {loadingButtons.has(`project-${project.slug}`) ? (
+                            <>
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              Loading...
+                            </>
+                          ) : (
+                            <>
+                              View Details
+                              <ArrowRight className="w-4 h-4 ml-2" />
+                            </>
+                          )}
                         </Button>
                       </Link>
                     </CardContent>
@@ -624,7 +651,7 @@ export default function Portfolio() {
         </section>
 
         {/* Freelance Section */}
-        <section id="freelance" className="py-20">
+        <section id="freelance" className="py-20 bg-muted/50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -775,7 +802,7 @@ export default function Portfolio() {
         </section>
 
         {/* Skills Section */}
-        <section ref={skillsRef} id="skills" className="py-20">
+        <section ref={skillsRef} id="skills" className="py-20 bg-muted/50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -844,16 +871,16 @@ export default function Portfolio() {
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <CardHeader className="text-center">
-                      <div className="p-3 bg-primary/10 rounded-lg text-primary w-fit mx-auto mb-3">
+                  <Card className="h-full shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                    <CardHeader className="text-center relative z-10">
+                      <div className="p-3 bg-primary/10 rounded-lg text-primary w-fit mx-auto mb-3 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 group-hover:scale-110">
                         {category.icon}
                       </div>
-                      <CardTitle className="text-xl">
+                      <CardTitle className="text-xl group-hover:text-primary transition-colors">
                         {category.category}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="relative z-10">
                       <div className="flex flex-wrap gap-2">
                         {category.skills.map((skill, skillIndex) => (
                           <Badge
@@ -1023,7 +1050,7 @@ export default function Portfolio() {
         </section>
 
         {/* Job Match Analyzer Section */}
-        <section ref={jobMatchRef} id="job-match" className="py-20">
+        <section ref={jobMatchRef} id="job-match" className="py-20 bg-muted/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1053,7 +1080,7 @@ export default function Portfolio() {
         </section>
 
         {/* Contact Section */}
-        <section ref={contactRef} id="contact" className="py-20">
+        <section ref={contactRef} id="contact" className="py-20 bg-muted/50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1070,13 +1097,14 @@ export default function Portfolio() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
               {/* Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
+                className="h-full"
               >
                 <ContactForm />
               </motion.div>
@@ -1087,58 +1115,56 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="space-y-8"
+                className="h-full"
               >
-                <div>
-                  <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
-                  <p className="text-muted-foreground mb-8">
-                    I'm always excited to discuss new opportunities, interesting
-                    projects, and potential collaborations. Whether you're
-                    looking for a full-time developer, freelance help, or just
-                    want to chat about technology, I'd love to hear from you.
-                  </p>
-                </div>
+                <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden h-full">
+                  <CardContent className="p-8 relative z-10 h-full flex flex-col">
+                    <h3 className="text-2xl font-bold mb-8 group-hover:text-primary transition-colors">Let's Connect</h3>
+                    <p className="text-muted-foreground mb-8 leading-relaxed">
+                      I'm always excited to discuss new opportunities, interesting
+                      projects, and potential collaborations. Whether you're
+                      looking for a full-time developer, freelance help, or just
+                      want to chat about technology, I'd love to hear from you.
+                    </p>
 
-                <div className="grid gap-6">
-                  {[
-                    {
-                      icon: <Mail className="w-6 h-6" />,
-                      title: "Email",
-                      content: "omkardongre5@gmail.com",
-                      link: "mailto:omkardongre5@gmail.com",
-                      description: "Best for detailed discussions",
-                    },
-                    {
-                      icon: <Github className="w-6 h-6" />,
-                      title: "GitHub",
-                      content: "github.com/omkardongre",
-                      link: "https://github.com/omkardongre",
-                      description: "Check out my latest code",
-                    },
-                    {
-                      icon: <Linkedin className="w-6 h-6" />,
-                      title: "LinkedIn",
-                      content: "linkedin.com/in/omkar-dongre",
-                      link: "https://www.linkedin.com/in/omkar-dongre-133942151",
-                      description: "Professional networking",
-                    },
-                  ].map((contact, index) => (
-                    <Card
-                      key={index}
-                      className="shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start gap-4">
-                          <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                    <div className="space-y-6">
+                      {[
+                        {
+                          icon: <Mail className="w-6 h-6" />,
+                          title: "Email",
+                          content: "omkardongre5@gmail.com",
+                          link: "mailto:omkardongre5@gmail.com",
+                          description: "Best for detailed discussions",
+                        },
+                        {
+                          icon: <Github className="w-6 h-6" />,
+                          title: "GitHub",
+                          content: "github.com/omkardongre",
+                          link: "https://github.com/omkardongre",
+                          description: "Check out my latest code",
+                        },
+                        {
+                          icon: <Linkedin className="w-6 h-6" />,
+                          title: "LinkedIn",
+                          content: "linkedin.com/in/omkar-dongre",
+                          link: "https://www.linkedin.com/in/omkar-dongre-133942151",
+                          description: "Professional networking",
+                        },
+                      ].map((contact, index) => (
+                        <div
+                          key={index}
+                          className="flex items-start gap-4 pb-6 border-b border-border/30 last:pb-0 last:border-b-0"
+                        >
+                          <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 group-hover:scale-110 flex-shrink-0">
                             {contact.icon}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-lg mb-1">
+                            <h4 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
                               {contact.title}
                             </h4>
                             <a
                               href={contact.link}
-                              className="text-primary hover:underline block mb-2"
+                              className="text-primary hover:underline block mb-2 font-medium"
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -1149,10 +1175,10 @@ export default function Portfolio() {
                             </p>
                           </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             </div>
           </div>

@@ -558,7 +558,7 @@ export default function ProjectDetail({
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 relative z-10">
+      <section className="py-20 relative z-10 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="flex justify-center items-center gap-4 mb-6">
@@ -587,10 +587,10 @@ export default function ProjectDetail({
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
-            <Card className="text-center shadow-lg">
-              <CardContent className="p-6">
-                <Calendar className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+            <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+              <CardContent className="p-6 relative z-10">
+                <Calendar className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
                   Timeline
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
@@ -598,10 +598,10 @@ export default function ProjectDetail({
                 </p>
               </CardContent>
             </Card>
-            <Card className="text-center shadow-lg">
-              <CardContent className="p-6">
-                <Users className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+            <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+              <CardContent className="p-6 relative z-10">
+                <Users className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
                   Team
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
@@ -609,10 +609,10 @@ export default function ProjectDetail({
                 </p>
               </CardContent>
             </Card>
-            <Card className="text-center shadow-lg">
-              <CardContent className="p-6">
-                <Code className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+            <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+              <CardContent className="p-6 relative z-10">
+                <Code className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
                   Technologies
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
@@ -625,7 +625,7 @@ export default function ProjectDetail({
       </section>
 
       {/* Image Gallery */}
-      <section className="py-16 bg-white dark:bg-gray-800">
+      <section className="py-16 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -731,7 +731,7 @@ export default function ProjectDetail({
       </section>
 
       {/* Detailed Content */}
-      <section className="py-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <section className="py-16 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-4 mb-8">
@@ -747,11 +747,11 @@ export default function ProjectDetail({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <Card className="shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">Project Overview</CardTitle>
+                <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="text-2xl group-hover:text-primary transition-colors">Project Overview</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-6 relative z-10">
                     <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                       {project.longDescription}
                     </p>
@@ -835,9 +835,9 @@ export default function ProjectDetail({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <Card className="shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">
+                <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="text-2xl group-hover:text-primary transition-colors">
                       Technical Architecture
                     </CardTitle>
                     <CardDescription>
@@ -845,7 +845,7 @@ export default function ProjectDetail({
                       technology choices
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-6 relative z-10">
                     {Object.entries(project.architecture).map(
                       ([key, value], index) => (
                         <div
@@ -874,13 +874,13 @@ export default function ProjectDetail({
                 className="space-y-6"
               >
                 {project.challenges.map((challenge, index) => (
-                  <Card key={index} className="shadow-lg">
-                    <CardHeader>
-                      <CardTitle className="text-xl text-red-600 dark:text-red-400">
+                  <Card key={index} className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-xl text-red-600 dark:text-red-400 group-hover:text-primary transition-colors">
                         Challenge #{index + 1}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-4 relative z-10">
                       <div>
                         <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
                           Problem:

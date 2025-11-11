@@ -2,8 +2,8 @@
   "about": {
     "name": "Omkar Dongre",
     "title": "Fullstack Developer | Software Engineer",
-    "bio": "Ex-Sandvine engineer with 2+ years of experience designing network security systems, threat detection engines, and scalable microservices. Strong foundation in Go, C++, and system-level programming. Currently building fullstack applications with modern web technologies.",
-    "experience_years": 2,
+    "bio": "Ex-Sandvine engineer with 2.5+ years of experience designing network security systems, threat detection engines, and scalable microservices. Auth0 Hackathon 2025 winner with ESG Copilot - an autonomous multi-agent AI system. Strong foundation in Go, C++, and system-level programming. Currently building fullstack applications with modern web technologies and AI integration.",
+    "experience_years": 2.5,
     "location": "India",
     "email": "contact available on portfolio",
     "linkedin": "https://www.linkedin.com/in/omkar-dongre-133942151",
@@ -14,7 +14,7 @@
       "company": "Sandvine",
       "role": "Software Engineer",
       "duration": "2021 - 2023",
-      "description": "Designed and implemented network security and threat detection systems. Developed Go microservices for real-time threat detection across distributed network devices. Optimized network protocols and implemented system diagnostics monitoring with Python APIs."
+      "description": "Designed and implemented centralized security engine (MSE) for distributed threat detection. Developed Go microservices for real-time threat detection across distributed network devices using WebSocket connections. Optimized session context protocol reducing CPU/memory overhead. Implemented YANG data modeling for network configuration and Docker containerization."
     },
     {
       "company": "Bentley Systems",
@@ -37,13 +37,15 @@
     "databases": ["MongoDB", "PostgreSQL", "Prisma"],
     "cloud": ["AWS (ECS, S3)", "Vercel", "Render", "Cloudinary"],
     "tools": ["Docker", "Git", "RabbitMQ", "Socket.IO"],
-    "ai_ml": ["Google Gemini", "AssemblyAI", "Voiceflow"],
+    "ai_ml": ["Google Gemini 2.0 Flash", "LangChain", "RAG", "Multi-agent AI", "AssemblyAI", "Voiceflow"],
     "specialties": [
       "Fullstack Development",
       "System Programming",
       "Microservices",
       "Real-time Applications",
-      "Cloud Deployment"
+      "Cloud Deployment",
+      "AI/ML Integration",
+      "Multi-agent Systems"
     ]
   },
   "projects": [
@@ -114,6 +116,16 @@
       "github": "https://github.com/omkardongre/Food-Ordering-App",
       "demo": "https://restaurant.omkard.site/",
       "type": "fullstack"
+    }
+  ],
+  "achievements": [
+    {
+      "title": "Auth0 Hackathon 2025 - Winner",
+      "project": "ESG Copilot",
+      "description": "Autonomous multi-agent AI system that automates ESG (Environmental, Social, Governance) compliance for small and medium businesses. Features 5 core agents handling regulation research, ESG data collection, emissions calculations, report generation (GRI/SASB/TCFD formats), and permission-aware RAG chat. All secured end-to-end with Auth0 for AI Agents.",
+      "tech_stack": ["Auth0", "Next.js", "Node.js", "Google Gemini", "LangChain", "BigQuery", "Pinecone"],
+      "link": "https://dev.to/omkar598/esg-copilot-17fn",
+      "date": "2025"
     }
   ],
   "seeking": {

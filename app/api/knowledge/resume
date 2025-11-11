@@ -7,7 +7,7 @@ Pune, India | omkardongre5@gmail.com
 
 ## PROFILE
 
-Software Engineer with 2.5+ years building distributed systems and full-stack applications. Specialized in Go/C++ backend development with hands-on experience in network security, protocol optimization, and database systems. Recently expanded expertise in modern full-stack stack (Next.js, React, Angular). Published researcher in Computer Vision with proven track record in system performance optimization and open-source contributions.
+Software Engineer with 2.5+ years building distributed systems and full-stack applications. **Auth0 Hackathon 2025 Winner** with ESG Copilot - an autonomous multi-agent AI system for ESG compliance automation. Specialized in Go/C++ backend development with hands-on experience in network security, protocol optimization, and database systems. Recently expanded expertise in modern full-stack development (Next.js, React, Angular) and AI/ML integration. Published researcher in Computer Vision with proven track record in system performance optimization and open-source contributions.
 
 ---
 
@@ -41,12 +41,23 @@ Software Engineer with 2.5+ years building distributed systems and full-stack ap
 
 ## RECENT DEVELOPMENT & OPEN SOURCE
 
-### Full-Stack Development & Contributions
+### Full-Stack Development & AI Integration
 **2025 — Present**
 
+- **Auth0 Hackathon 2025 Winner**: Built ESG Copilot, an autonomous multi-agent AI system that automates ESG compliance for SMBs. Features 5 core agents handling regulation research, ESG data collection, emissions calculations, report generation (GRI/SASB/TCFD), and permission-aware RAG chat. Secured end-to-end with Auth0 for AI Agents.
+- Tech Stack: Auth0, Next.js, Node.js, Google Gemini 2.0 Flash, LangChain, BigQuery, Pinecone
 - Active contributor to Trigger.dev; demonstrated ability to work with complex production codebases
 
 ---
+
+## ACHIEVEMENTS & AWARDS
+
+### Auth0 Hackathon 2025 - Winner
+**ESG Copilot Project**
+- Autonomous multi-agent AI system for ESG compliance automation
+- Secured end-to-end with Auth0 for AI Agents
+- Tech: Next.js, Node.js, Google Gemini, LangChain, BigQuery, Pinecone
+- Link: https://dev.to/omkar598/esg-copilot-17fn
 
 ## EDUCATION
 

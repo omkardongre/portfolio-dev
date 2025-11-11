@@ -334,7 +334,7 @@ export default function ExperienceDetail({
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20">
+      <section className="py-20 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -368,37 +368,37 @@ export default function ExperienceDetail({
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16"
           >
-            <Card className="text-center shadow-lg">
-              <CardContent className="p-6">
-                <Calendar className="w-8 h-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-1">Duration</h3>
+            <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+              <CardContent className="p-6 relative z-10">
+                <Calendar className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">Duration</h3>
                 <p className="text-muted-foreground text-sm">
                   {experience.duration}
                 </p>
               </CardContent>
             </Card>
-            <Card className="text-center shadow-lg">
-              <CardContent className="p-6">
-                <MapPin className="w-8 h-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-1">Location</h3>
+            <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+              <CardContent className="p-6 relative z-10">
+                <MapPin className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">Location</h3>
                 <p className="text-muted-foreground text-sm">
                   {experience.location}
                 </p>
               </CardContent>
             </Card>
-            <Card className="text-center shadow-lg">
-              <CardContent className="p-6">
-                <Users className="w-8 h-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-1">Team</h3>
+            <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+              <CardContent className="p-6 relative z-10">
+                <Users className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">Team</h3>
                 <p className="text-muted-foreground text-sm">
                   {experience.team}
                 </p>
               </CardContent>
             </Card>
-            <Card className="text-center shadow-lg">
-              <CardContent className="p-6">
-                <Target className="w-8 h-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-1">Company Size</h3>
+            <Card className="text-center shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+              <CardContent className="p-6 relative z-10">
+                <Target className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">Company Size</h3>
                 <p className="text-muted-foreground text-sm">
                   {experience.companySize}
                 </p>
@@ -433,11 +433,11 @@ export default function ExperienceDetail({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <Card className="shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">Company Overview</CardTitle>
+                <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="text-2xl group-hover:text-primary transition-colors">Company Overview</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-6 relative z-10">
                     <p className="text-lg leading-relaxed">
                       {experience.companyDescription}
                     </p>
@@ -472,16 +472,16 @@ export default function ExperienceDetail({
                 className="space-y-6"
               >
                 {experience.majorProjects.map((project, index) => (
-                  <Card key={index} className="shadow-lg">
-                    <CardHeader>
-                      <CardTitle className="text-xl text-primary">
+                  <Card key={index} className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-xl text-primary group-hover:text-primary transition-colors">
                         {project.name}
                       </CardTitle>
                       <CardDescription className="text-base">
                         {project.description}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-4 relative z-10">
                       <div>
                         <h4 className="font-semibold mb-2">
                           Technologies Used:
@@ -532,14 +532,14 @@ export default function ExperienceDetail({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <Card className="shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-2xl flex items-center gap-3">
-                      <Award className="w-6 h-6 text-primary" />
+                <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="text-2xl flex items-center gap-3 group-hover:text-primary transition-colors">
+                      <Award className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
                       Key Achievements
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="relative z-10">
                     <div className="grid gap-4">
                       {experience.achievements.map((achievement, index) => (
                         <div
@@ -564,13 +564,13 @@ export default function ExperienceDetail({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <Card className="shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">
+                <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="text-2xl group-hover:text-primary transition-colors">
                       Technical Skills Developed
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="relative z-10">
                     <div className="flex flex-wrap gap-3">
                       {experience.technicalSkills.map((skill, index) => (
                         <Badge
@@ -593,13 +593,13 @@ export default function ExperienceDetail({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <Card className="shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">
+                <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="text-2xl group-hover:text-primary transition-colors">
                       Learning Outcomes
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="relative z-10">
                     <ul className="space-y-3">
                       {experience.learningOutcomes.map((outcome, index) => (
                         <li key={index} className="flex items-start gap-3">

@@ -161,17 +161,17 @@ export function ContactForm() {
   }
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-3 text-2xl">
-          <MessageSquare className="w-6 h-6 text-primary" />
+    <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden h-full">
+      <CardHeader className="relative z-10">
+        <CardTitle className="flex items-center gap-3 text-2xl group-hover:text-primary transition-colors">
+          <MessageSquare className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
           Let's Work Together
         </CardTitle>
         <CardDescription className="text-base">
           Ready to discuss your next project? Fill out the form below and I'll get back to you.
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="relative z-10">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

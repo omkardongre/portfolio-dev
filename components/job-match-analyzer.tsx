@@ -90,54 +90,57 @@ export function JobMatchAnalyzer() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <Card className="shadow-lg">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Briefcase className="w-6 h-6 text-primary" />
+      <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+        <CardHeader className="relative z-10">
+          <CardTitle className="flex items-center gap-2 group-hover:text-primary transition-colors">
+            <Briefcase className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
             Job Match Analyzer
           </CardTitle>
           <CardDescription>
             Paste a job posting URL or description to see how well Omkar matches the role
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <Tabs value={inputMethod} onValueChange={(v) => setInputMethod(v as 'url' | 'text')}>
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="url">
-                <LinkIcon className="w-4 h-4 mr-2" />
+        <CardContent className="relative z-10 space-y-6">
+          <Tabs value={inputMethod} onValueChange={(v) => setInputMethod(v as 'url' | 'text')} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-6">
+              <TabsTrigger value="url" className="gap-2">
+                <LinkIcon className="w-4 h-4" />
                 Job URL
               </TabsTrigger>
-              <TabsTrigger value="text">
-                <FileText className="w-4 h-4 mr-2" />
+              <TabsTrigger value="text" className="gap-2">
+                <FileText className="w-4 h-4" />
                 Job Description
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="url" className="space-y-4">
-              <div className="space-y-2">
+            <TabsContent value="url" className="space-y-4 mt-6">
+              <div className="space-y-3">
+                <label className="text-sm font-semibold text-muted-foreground">Job Posting URL</label>
                 <Input
                   placeholder="https://linkedin.com/jobs/view/..."
                   value={jobUrl}
                   onChange={(e) => setJobUrl(e.target.value)}
                   disabled={isAnalyzing}
+                  className="h-11"
                 />
-                <p className="text-xs text-muted-foreground">
-                  Paste a job posting URL from LinkedIn, Indeed, or any job board
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Paste a job posting URL from LinkedIn, Indeed, Glassdoor, or any job board
                 </p>
               </div>
             </TabsContent>
 
-            <TabsContent value="text" className="space-y-4">
-              <div className="space-y-2">
+            <TabsContent value="text" className="space-y-4 mt-6">
+              <div className="space-y-3">
+                <label className="text-sm font-semibold text-muted-foreground">Job Description</label>
                 <Textarea
-                  placeholder="Paste the full job description here..."
+                  placeholder="Paste the full job description here including requirements, responsibilities, and qualifications..."
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
                   disabled={isAnalyzing}
-                  className="min-h-[200px]"
+                  className="min-h-[240px] resize-none"
                 />
-                <p className="text-xs text-muted-foreground">
-                  Copy and paste the complete job description including requirements and responsibilities
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Copy and paste the complete job description including requirements, responsibilities, and qualifications
                 </p>
               </div>
             </TabsContent>
@@ -146,7 +149,7 @@ export function JobMatchAnalyzer() {
           <Button
             onClick={analyzeJob}
             disabled={isAnalyzing || (!jobUrl && !jobDescription)}
-            className="w-full mt-4"
+            className="w-full mt-6 h-11 text-base font-semibold"
             size="lg"
           >
             {isAnalyzing ? (
@@ -173,16 +176,16 @@ export function JobMatchAnalyzer() {
             className="space-y-6"
           >
             {/* Match Score Card */}
-            <Card className="shadow-lg border-2 border-primary/20">
-              <CardContent className="p-8">
-                <div className="text-center space-y-4">
+            <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm relative overflow-hidden">
+              <CardContent className="p-12 relative z-10">
+                <div className="text-center space-y-8">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
                     className="relative inline-block"
                   >
-                    <svg className="w-48 h-48 mx-auto" viewBox="0 0 200 200">
+                    <svg className="w-56 h-56 mx-auto" viewBox="0 0 200 200">
                       <circle
                         cx="100"
                         cy="100"
@@ -219,14 +222,14 @@ export function JobMatchAnalyzer() {
                     </svg>
                   </motion.div>
 
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">Match Score</h3>
-                    <Badge variant="outline" className={`text-lg px-4 py-2 ${getRecommendationColor(result.recommendation)}`}>
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-bold">Match Score</h3>
+                    <Badge variant="outline" className={`text-base px-6 py-2 ${getRecommendationColor(result.recommendation)}`}>
                       {result.recommendation}
                     </Badge>
                   </div>
 
-                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                  <p className="text-muted-foreground max-w-3xl mx-auto text-base leading-relaxed">
                     {result.summary}
                   </p>
                 </div>
@@ -234,17 +237,17 @@ export function JobMatchAnalyzer() {
             </Card>
 
             {/* Details Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
               {/* Matching Skills */}
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-green-600 dark:text-green-400">
+              <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                <CardHeader className="relative z-10 pb-4">
+                  <CardTitle className="flex items-center gap-2 text-green-600 dark:text-green-400 text-lg">
                     <CheckCircle2 className="w-5 h-5" />
                     Matching Skills ({result.matchingSkills.length})
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
+                <CardContent className="relative z-10">
+                  <div className="flex flex-wrap gap-3">
                     {result.matchingSkills.map((skill, i) => (
                       <motion.div
                         key={i}
@@ -262,15 +265,15 @@ export function JobMatchAnalyzer() {
               </Card>
 
               {/* Missing Skills */}
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-red-600 dark:text-red-400">
+              <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                <CardHeader className="relative z-10 pb-4">
+                  <CardTitle className="flex items-center gap-2 text-red-600 dark:text-red-400 text-lg">
                     <XCircle className="w-5 h-5" />
                     Missing Skills ({result.missingSkills.length})
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
+                <CardContent className="relative z-10">
+                  <div className="flex flex-wrap gap-3">
                     {result.missingSkills.length > 0 ? (
                       result.missingSkills.map((skill, i) => (
                         <motion.div
@@ -292,15 +295,15 @@ export function JobMatchAnalyzer() {
               </Card>
 
               {/* Key Strengths */}
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+              <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                <CardHeader className="relative z-10 pb-4">
+                  <CardTitle className="flex items-center gap-2 text-lg">
                     <Award className="w-5 h-5 text-primary" />
                     Key Strengths
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
+                <CardContent className="relative z-10">
+                  <ul className="space-y-3">
                     {result.keyStrengths.map((strength, i) => (
                       <motion.li
                         key={i}
@@ -318,15 +321,15 @@ export function JobMatchAnalyzer() {
               </Card>
 
               {/* Areas to Highlight */}
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+              <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                <CardHeader className="relative z-10 pb-4">
+                  <CardTitle className="flex items-center gap-2 text-lg">
                     <AlertCircle className="w-5 h-5 text-primary" />
                     Areas to Highlight
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
+                <CardContent className="relative z-10">
+                  <ul className="space-y-3">
                     {result.areasToHighlight.map((area, i) => (
                       <motion.li
                         key={i}
@@ -346,15 +349,15 @@ export function JobMatchAnalyzer() {
 
             {/* Relevant Experience */}
             {result.relevantExperience.length > 0 && (
-              <Card className="shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+              <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                <CardHeader className="relative z-10 pb-4">
+                  <CardTitle className="flex items-center gap-2 text-lg">
                     <Briefcase className="w-5 h-5 text-primary" />
                     Relevant Experience
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
+                <CardContent className="relative z-10">
+                  <ul className="space-y-4">
                     {result.relevantExperience.map((exp, i) => (
                       <motion.li
                         key={i}
