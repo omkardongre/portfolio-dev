@@ -19,6 +19,7 @@ export function MobileMenu({ activeSection, onNavigate }: MobileMenuProps) {
     { id: 'journey', label: 'Journey' },
     { id: 'projects', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
+    { id: 'achievements', label: 'Achievements' },
     { id: 'contact', label: 'Contact' },
   ]
 

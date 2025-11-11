@@ -6,8 +6,11 @@ A professional, interactive developer portfolio showcasing projects, skills, and
 
 ### 📄 Core Sections
 - **Home Page** - Hero section with smooth animations
+- **About** - Personal introduction with feature highlights
+- **Journey** - Career timeline with company milestones
 - **Projects** - Showcase with live demos and tech stacks
 - **Skills** - Tech stack display with visual indicators
+- **Achievements** - Hackathon wins and accomplishments (Auth0 Hackathon 2025 - ESG Copilot)
 - **Contact** - Functional form with validation
 - **Experience** - Detailed company pages with tabs (Overview, Projects, Achievements, Skills, Learning)
 
@@ -18,20 +21,30 @@ A professional, interactive developer portfolio showcasing projects, skills, and
 - Modern UI with glassmorphism effects
 - Interactive hover states and transitions
 
-### 🚀 Bonus Features
-- AI chat assistant for portfolio Q&A
-- Job match analyzer tool
-- GitHub stats integration
-- Toast notifications
+### 🚀 Interactive Features
+- **Achievements Section** - Hackathon wins with detailed project information
+- **AI Chat Assistant** - Portfolio Q&A powered by Google Gemini 2.0 Flash
+- **Job Match Analyzer** - AI-powered job matching tool for recruiters
+- **GitHub Stats Integration** - Real-time GitHub activity display
+- **Dark/Light Mode** - Theme toggle with persistent preferences
+- **Glassmorphism Effects** - Modern UI with backdrop blur and transparency
+- **Toast Notifications** - User feedback for form submissions
 
 ## 🛠️ Tech Stack
 
+### Frontend
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS + shadcn/ui
-- **Animations:** Framer Motion
-- **AI:** Google Gemini 2.0 Flash (optional)
-- **Deployment:** Vercel
+- **Animations:** Framer Motion + ScrollReveal
+- **Icons:** Lucide React
+
+### AI & Backend
+- **AI Model:** Google Gemini 2.0 Flash
+- **API Routes:** Next.js API routes (chat, job-match, contact)
+
+### Deployment
+- **Hosting:** Vercel (recommended)
 
 ## 🚀 Getting Started
 
@@ -57,14 +70,26 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ```
 ├── app/
-│   ├── api/           # API routes (chat, job-match)
-│   └── page.tsx       # Main portfolio page
+│   ├── api/
+│   │   ├── chat/              # AI chat endpoint
+│   │   ├── contact/           # Contact form endpoint
+│   │   └── job-match/         # Job match analyzer endpoint
+│   ├── experience/            # Dynamic experience pages
+│   ├── projects/              # Dynamic project pages
+│   ├── layout.tsx             # Root layout with theme provider
+│   └── page.tsx               # Main portfolio page
 ├── components/
-│   ├── hero-section.tsx
-│   ├── contact-form.tsx
-│   ├── ai-chat.tsx
-│   └── ui/            # shadcn components
-└── styles/
+│   ├── ai-chat.tsx            # AI chat assistant
+│   ├── contact-form.tsx       # Contact form with validation
+│   ├── github-stats.tsx       # GitHub stats display
+│   ├── job-match-analyzer.tsx # Job matching tool
+│   ├── mobile-menu.tsx        # Mobile navigation
+│   ├── theme-toggle.tsx       # Dark/light mode toggle
+│   └── ui/                    # shadcn/ui components
+├── lib/
+│   └── utils.ts               # Utility functions
+└── public/
+    └── resume.pdf             # Resume file
 ```
 
 ## 🧪 Build & Deploy

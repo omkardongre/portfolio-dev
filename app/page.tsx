@@ -17,6 +17,8 @@ import {
   GitBranch,
   ArrowRight,
   Star,
+  Trophy,
+  Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -47,6 +49,7 @@ export default function Portfolio() {
   const projectsRef = useRef<HTMLElement>(null);
   const skillsRef = useRef<HTMLElement>(null);
   const resumeRef = useRef<HTMLElement>(null);
+  const achievementsRef = useRef<HTMLElement>(null);
   const jobMatchRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
 
@@ -62,6 +65,7 @@ export default function Portfolio() {
         "opensource",
         "skills",
         "resume",
+        "achievements",
         "job-match",
         "contact",
       ];
@@ -134,6 +138,7 @@ export default function Portfolio() {
         projectsRef,
         skillsRef,
         resumeRef,
+        achievementsRef,
         jobMatchRef,
         contactRef,
       ];
@@ -181,6 +186,7 @@ export default function Portfolio() {
                   { id: "journey", label: "Journey" },
                   { id: "projects", label: "Projects" },
                   { id: "skills", label: "Skills" },
+                  { id: "achievements", label: "Achievements" },
                   { id: "contact", label: "Contact" },
                 ].map((item) => (
                   <button
@@ -372,13 +378,13 @@ export default function Portfolio() {
                     className={`relative flex items-center ${item.side === "left" ? "justify-start" : "justify-end"}`}
                   >
                     <Card
-                      className={`w-full max-w-md shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer ${
+                      className={`w-full max-w-md shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden ${
                         item.side === "left" ? "mr-8" : "ml-8"
                       }`}
                     >
-                      <CardHeader>
+                      <CardHeader className="relative z-10">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                          <div className="p-2 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 group-hover:scale-110">
                             {item.icon}
                           </div>
                           <div>
@@ -391,7 +397,10 @@ export default function Portfolio() {
                           </div>
                         </div>
                       </CardHeader>
-                      <CardContent>
+                      {/* Gradient accent */}
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-full blur-2xl -mr-16 -mt-16"></div>
+                      
+                      <CardContent className="relative z-10">
                         <div className="flex items-center gap-2 mb-3">
                           <Calendar className="w-4 h-4 text-muted-foreground" />
                           <span className="text-sm text-muted-foreground">
@@ -625,10 +634,10 @@ export default function Portfolio() {
             >
               <h2 className="text-4xl font-bold mb-6">Freelance Work</h2>
               <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
-              <Card className="shadow-lg">
-                <CardContent className="p-12">
-                  <div className="text-6xl mb-6">🚀</div>
-                  <h3 className="text-2xl font-bold mb-4">Coming Soon</h3>
+              <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                <CardContent className="p-12 relative z-10">
+                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">🚀</div>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Coming Soon</h3>
                   <p className="text-lg text-muted-foreground mb-6">
                     Working on freelance fullstack projects — soon to list
                     selected client work here.
@@ -876,9 +885,9 @@ export default function Portfolio() {
             >
               <h2 className="text-4xl font-bold mb-6">Resume</h2>
               <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
-              <Card className="shadow-lg">
-                <CardContent className="p-12">
-                  <div className="text-6xl mb-6">📄</div>
+              <Card className="shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                <CardContent className="p-12 relative z-10">
+                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">📄</div>
                   <h3 className="text-2xl font-bold mb-4">
                     Download My Resume
                   </h3>
@@ -897,6 +906,119 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Achievements Section */}
+        <section ref={achievementsRef} id="achievements" className="py-20 bg-muted/50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl font-bold mb-6">Hackathon Achievements</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 mx-auto mb-8"></div>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Showcasing my hackathon wins and innovative solutions built during competitions.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+              {/* Auth0 Hackathon Win */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Card className="h-full shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden">
+                  {/* Gradient accent */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full blur-2xl -mr-16 -mt-16"></div>
+                  
+                  <CardHeader className="relative z-10">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="text-6xl group-hover:scale-110 transition-transform duration-300">🏆</div>
+                      <Badge className="bg-yellow-500/20 text-yellow-700 dark:text-yellow-300 border-yellow-500/50">
+                        <Trophy className="w-3 h-3 mr-1" />
+                        Winner
+                      </Badge>
+                    </div>
+                    <CardTitle className="text-2xl group-hover:text-primary transition-colors mb-2">
+                      Auth0 Hackathon 2025
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      Autonomous multi-agent ESG compliance automation with Auth0 security
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-6 relative z-10">
+                    <div>
+                      <p className="text-sm font-semibold text-muted-foreground mb-3 flex items-center gap-2">
+                        <span className="text-primary">→</span> Project Overview
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed">
+                        An autonomous multi-agent AI system that automates ESG (Environmental, Social, Governance) compliance for small and medium businesses. Features 5 core agents handling regulation research, ESG data collection, emissions calculations, report generation (GRI/SASB/TCFD formats), and permission-aware RAG chat. All secured end-to-end with Auth0 for AI Agents - every agent action is authenticated, authorized, and audited.
+                      </p>
+                    </div>
+                    
+                    <div className="h-px bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0"></div>
+                    
+                    <div>
+                      <p className="text-sm font-semibold text-muted-foreground mb-3 flex items-center gap-2">
+                        <span className="text-primary">→</span> Tech Stack
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {["Auth0", "Next.js", "Node.js", "Google Gemini", "LangChain", "BigQuery", "Pinecone"].map((tech) => (
+                          <Badge
+                            key={tech}
+                            variant="secondary"
+                            className="group-hover:bg-primary/20 transition-colors"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="h-px bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0"></div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="group-hover:bg-primary group-hover:text-primary-foreground transition-all"
+                      >
+                        <a
+                          href="https://dev.to/omkar598/esg-copilot-17fn"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Read Article
+                        </a>
+                      </Button>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="group-hover:bg-primary group-hover:text-primary-foreground transition-all"
+                      >
+                        <a
+                          href="https://dev.to/challenges/auth0-2025-10-08"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Award className="w-4 h-4 mr-2" />
+                          Challenge
+                        </a>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
           </div>
         </section>
 
