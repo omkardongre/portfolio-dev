@@ -418,7 +418,7 @@ export default function ExperienceDetail({
           >
             <TabsList
               aria-label="Experience sections"
-              className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-8"
+              className="grid w-full grid-cols-2 md:grid-cols-5 gap-2 mb-8"
             >
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="projects">Projects</TabsTrigger>

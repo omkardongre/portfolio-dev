@@ -383,10 +383,10 @@ export default function Portfolio() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: index * 0.2 }}
                     viewport={{ once: true }}
-                    className={`relative flex items-center ${item.side === "left" ? "justify-start" : "justify-end"}`}
+                    className={`relative flex items-center md:${item.side === "left" ? "justify-start" : "justify-end"} justify-center`}
                   >
                     <Card
-                      className={`w-full max-w-md shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden ${
+                      className={`w-full max-w-md shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer border-border/50 hover:border-primary/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:bg-card/80 relative overflow-hidden md:${
                         item.side === "left" ? "mr-8" : "ml-8"
                       }`}
                     >
@@ -452,7 +452,7 @@ export default function Portfolio() {
                     </Card>
 
                     {/* Timeline Dot */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg"></div>
+                    <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg"></div>
                   </motion.div>
                 ))}
               </div>
@@ -573,7 +573,7 @@ export default function Portfolio() {
                           </Badge>
                         )}
                       </div>
-                      <div className="flex flex-wrap gap-2 pt-2">
+                      <div className="flex flex-col sm:flex-row gap-2 pt-2">
                         {project.github && (
                           <Button
                             variant="outline"
