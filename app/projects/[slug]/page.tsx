@@ -565,7 +565,7 @@ export default function ProjectDetail({
               <Badge variant="secondary" className="text-sm">
                 {project.category}
               </Badge>
-              <Badge variant="outline" className="text-sm">
+              <Badge variant="secondary" className="text-sm">
                 {project.status}
               </Badge>
             </div>

@@ -346,7 +346,7 @@ export default function ExperienceDetail({
               <Badge variant="secondary" className="text-sm">
                 {experience.type}
               </Badge>
-              <Badge variant="outline" className="text-sm">
+              <Badge variant="secondary" className="text-sm">
                 {experience.industry}
               </Badge>
             </div>
@@ -416,16 +416,18 @@ export default function ExperienceDetail({
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList
-              aria-label="Experience sections"
-              className="grid w-full grid-cols-2 md:grid-cols-5 gap-2 mb-8"
-            >
+            <div className="overflow-x-auto md:overflow-visible">
+              <TabsList
+                aria-label="Experience sections"
+                className="inline-flex md:grid md:w-full gap-2 mb-8 md:grid-cols-5 whitespace-nowrap md:whitespace-normal"
+              >
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="projects">Projects</TabsTrigger>
               <TabsTrigger value="achievements">Achievements</TabsTrigger>
               <TabsTrigger value="skills">Skills</TabsTrigger>
               <TabsTrigger value="learning">Learning</TabsTrigger>
-            </TabsList>
+              </TabsList>
+            </div>
 
             <TabsContent value="overview" className="space-y-8">
               <motion.div

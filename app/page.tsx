@@ -573,53 +573,40 @@ export default function Portfolio() {
                           </Badge>
                         )}
                       </div>
-                      <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                      <div className="flex flex-col gap-2 pt-2 w-full">
                         {project.github && (
                           <Button
                             variant="outline"
                             size="sm"
                             asChild
-                            className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors flex-1"
+                            className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
                           >
-                            <Link href={project.github} target="_blank">
+                            <Link href={project.github} target="_blank" className="flex items-center justify-center">
                               <Github className="w-4 h-4 mr-2" />
                               Code
                             </Link>
                           </Button>
                         )}
-                        {project.demo && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            asChild
-                            className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors flex-1"
+                        <Link href={`/projects/${project.slug}`} className="w-full">
+                          <Button 
+                            className="w-full justify-center" 
+                            variant="default"
+                            onClick={() => handleButtonClick(`project-${project.slug}`)}
                           >
-                            <Link href={project.demo} target="_blank">
-                              <ExternalLink className="w-4 h-4 mr-2" />
-                              Demo
-                            </Link>
+                            {loadingButtons.has(`project-${project.slug}`) ? (
+                              <>
+                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                Loading...
+                              </>
+                            ) : (
+                              <>
+                                View Details
+                                <ArrowRight className="w-4 h-4 ml-2" />
+                              </>
+                            )}
                           </Button>
-                        )}
+                        </Link>
                       </div>
-                      <Link href={`/projects/${project.slug}`}>
-                        <Button 
-                          className="w-full mt-2" 
-                          variant="default"
-                          onClick={() => handleButtonClick(`project-${project.slug}`)}
-                        >
-                          {loadingButtons.has(`project-${project.slug}`) ? (
-                            <>
-                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                              Loading...
-                            </>
-                          ) : (
-                            <>
-                              View Details
-                              <ArrowRight className="w-4 h-4 ml-2" />
-                            </>
-                          )}
-                        </Button>
-                      </Link>
                     </CardContent>
                   </Card>
                 </motion.div>

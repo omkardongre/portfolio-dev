@@ -82,53 +82,51 @@ export function MobileMenu({ activeSection, onNavigate }: MobileMenuProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-64 bg-card border-l border-border shadow-2xl z-50 md:hidden"
+              className="fixed top-0 right-0 h-screen w-72 bg-card border-l border-border shadow-2xl z-50 md:hidden flex flex-col"
             >
-              <div className="flex flex-col h-full">
-                {/* Header */}
-                <div className="flex items-center justify-between p-4 border-b border-border">
-                  <span className="font-bold text-lg">Menu</span>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setIsOpen(false)}
-                    aria-label="Close menu"
-                  >
-                    <X className="w-5 h-5" />
-                  </Button>
-                </div>
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-border flex-shrink-0">
+                <span className="font-bold text-lg">Menu</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
 
-                {/* Menu Items */}
-                <nav className="flex-1 overflow-y-auto p-4">
-                  <ul className="space-y-2">
-                    {menuItems.map((item, index) => (
-                      <motion.li
-                        key={item.id}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.05 }}
+              {/* Menu Items */}
+              <nav className="flex-1 overflow-y-auto p-4">
+                <ul className="space-y-2">
+                  {menuItems.map((item, index) => (
+                    <motion.li
+                      key={item.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <button
+                        onClick={() => handleNavigate(item.id)}
+                        className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                          activeSection === item.id
+                            ? 'bg-primary text-primary-foreground font-semibold'
+                            : 'hover:bg-muted'
+                        }`}
                       >
-                        <button
-                          onClick={() => handleNavigate(item.id)}
-                          className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                            activeSection === item.id
-                              ? 'bg-primary text-primary-foreground font-semibold'
-                              : 'hover:bg-muted'
-                          }`}
-                        >
-                          {item.label}
-                        </button>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </nav>
+                        {item.label}
+                      </button>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
 
-                {/* Footer */}
-                <div className="p-4 border-t border-border">
-                  <p className="text-xs text-muted-foreground text-center">
-                    © 2025 Omkar Dongre
-                  </p>
-                </div>
+              {/* Footer */}
+              <div className="p-4 border-t border-border flex-shrink-0">
+                <p className="text-xs text-muted-foreground text-center">
+                  © 2025 Omkar Dongre
+                </p>
               </div>
             </motion.div>
           </>
